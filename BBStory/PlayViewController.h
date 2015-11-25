@@ -16,6 +16,7 @@
     int _index;
     NSArray* _data;
     NSString *_musicKey;
+    UILabel *_pageLabel;
 }
 
 @property(nonatomic, weak) ICSDrawerController *drawer;

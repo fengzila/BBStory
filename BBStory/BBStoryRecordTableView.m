@@ -104,7 +104,7 @@
     
     BBRecorderObject *data = [_data objectAtIndex:[_data count] - row - 1];
     
-    cell.textLabel.text = data.name;
+    cell.textLabel.text = [NSString stringWithFormat:@"No.%d  %@", (int)row+1, data.name];
     cell.detailTextLabel.text = data.time;
     
     cell.textLabel.font = [UIFont systemFontOfSize:16];

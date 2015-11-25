@@ -86,7 +86,7 @@
     
     NSDictionary *data = [self.data objectAtIndex:row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"No.%d  %@", row+1, [data objectForKey:@"title"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"No.%d  %@", (int)row+1, [data objectForKey:@"title"]];
     
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     

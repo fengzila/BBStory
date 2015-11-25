@@ -276,6 +276,13 @@
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
     [tabbarView addSubview:backBtn];
+    
+    _pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 100, tabbarView.height)];
+    _pageLabel.font = [UIFont boldSystemFontOfSize:16];
+    _pageLabel.textColor = [UIColor colorWithRed:113.0f/255.0f green:113.0f/255.0f blue:113.0f/255.0f alpha:1.0f];
+    _pageLabel.backgroundColor = [UIColor clearColor];
+    _pageLabel.textAlignment = NSTextAlignmentLeft;
+    [tabbarView addSubview:_pageLabel];
 }
 
 - (void)backAction
@@ -321,6 +328,8 @@
     [_avAudioPlayer prepareToPlay];
     
     _musicTitle.text = data.name;
+    
+    _pageLabel.text = [NSString stringWithFormat:@"%d/%d", (int)[_data count] - _index, (int)[_data count]];
 }
 
 // 播放
@@ -384,8 +393,8 @@
 // 上一首
 - (void)lastMusicAction:(id)sender
 {
-    _index--;
-    if (_index < 0) {
+    _index++;
+    if (_index >= [_data count]) {
         _index = 0;
     }
     [self updatePlayerSetting];
@@ -395,8 +404,8 @@
 // 下一首
 - (void)nextMusicAction:(id)sender
 {
-    _index++;
-    if (_index >= [_data count]) {
+    _index--;
+    if (_index < 0) {
         _index = (int)[_data count] - 1;
     }
     [self updatePlayerSetting];

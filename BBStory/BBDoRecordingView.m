@@ -293,7 +293,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[[UIAlertView alloc] initWithTitle:nil
-                                        message:@"录音已保存成功。\n请到【我的录音】中查看"
+                                        message:@"录音已保存成功。\n请到[主菜单-我的录音]中查看"
                                        delegate:nil
                               cancelButtonTitle:@"好的"
                               otherButtonTitles:nil] show];
@@ -424,12 +424,12 @@
         case 101:
             [_bgMusicBtn1 setBackgroundImage:[UIImage imageNamed:bgMusicImageLightName] forState:UIControlStateNormal];
             [_bgMusicBtn1 setTitleColor:lightColor forState:UIControlStateNormal];
-            [self playMusic:@"美人计" type:@"mp3"];
+            [self playMusic:@"SweetDreams" type:@"mp3"];
             break;
         case 102:
             [_bgMusicBtn2 setBackgroundImage:[UIImage imageNamed:bgMusicImageLightName] forState:UIControlStateNormal];
             [_bgMusicBtn2 setTitleColor:lightColor forState:UIControlStateNormal];
-            [self playMusic:@"SweetDreams" type:@"mp3"];
+            [self playMusic:@"美人计" type:@"mp3"];
             break;
         case 103:
             [_bgMusicBtn3 setBackgroundImage:[UIImage imageNamed:bgMusicImageLightName] forState:UIControlStateNormal];
