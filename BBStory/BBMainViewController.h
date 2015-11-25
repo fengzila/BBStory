@@ -8,25 +8,35 @@
 
 #import <UIKit/UIKit.h>
 #import "BBStoryTableView.h"
+#import "ICSDrawerController.h"
+#import "BBSegmentedControl.h"
+#import <GoogleMobileAds/GADBannerView.h>
 
-@interface BBMainViewController : UIViewController<BBStoryTableViewDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface BBMainViewController : UIViewController<BBStoryTableViewDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate, ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 {
 @private
-    BBStoryTableView          *_allView;
-    BBStoryTableView          *_loveView;
+    BBStoryTableView *_allView;
+    BBStoryTableView *_loveView;
     
-    UISearchBar               *mySearchBar;
+    UISearchBar *mySearchBar;
     UISearchDisplayController *searchDisplayController;
+//    BBSegmentedControl *_segControl;
+    UISegmentedControl *_segControl;
     
-    NSInteger                 _lastPosition;
-    BOOL                      _tabbarIsHidden;
+    NSInteger _lastPosition;
+    BOOL _tabbarIsHidden;
     
-    NSArray                   *_segTitleArr;
-    NSMutableArray            *searchResults;
-    NSArray                   *_allData;
-    NSMutableArray            *_loveData;
+    int _statusBarHeight;
     
-    int                       _loveDicCount;
+    NSArray *_segTitleArr;
+    NSMutableArray *searchResults;
+    NSArray *_allData;
+    NSMutableArray *_loveData;
+    
+    int _loveDicCount;
+    GADBannerView *_adBannerView;
 }
+
+@property(nonatomic, weak) ICSDrawerController *drawer;
 
 @end

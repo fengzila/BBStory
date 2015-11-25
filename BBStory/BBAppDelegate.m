@@ -9,6 +9,12 @@
 #import "BBAppDelegate.h"
 #import "BBMainViewController.h"
 #import "MobClick.h"
+#import "ICSDrawerController.h"
+#import "BBMenuViewController.h"
+#import "BBMainNavController.h"
+#import "BBNetworkService.h"
+#import "BBDataManager.h"
+#import "BTPlatform.h"
 
 @implementation BBAppDelegate
 
@@ -18,6 +24,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//    [[BTPlatform sharedInstance] logEnable:YES];
+//    [[BTPlatform sharedInstance] setAppKey:@"38f19d75462b97882a156c864b66b8ee" result:^(BOOL isAvailable) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:PLATFORMSTATUS_NOTIFICATION object:@(isAvailable)];
+//    }];
+    
     [MobClick startWithAppkey:@"5322c5df56240b031a0d715c"];
 //    [MobClick startWithAppkey:@"5322c5df56240b031a0d715c" reportPolicy:REALTIME channelId:nil];
     [MobClick updateOnlineConfig];
@@ -28,9 +39,22 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    NSArray *colors = @[[UIColor colorWithRed:237.0f/255.0f green:195.0f/255.0f blue:0.0f/255.0f alpha:1.0f],
+                        [UIColor colorWithRed:237.0f/255.0f green:147.0f/255.0f blue:0.0f/255.0f alpha:1.0f],
+                        [UIColor colorWithRed:237.0f/255.0f green:9.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
+                        ];
+    
+    [[BBDataManager getInstance] setCurContentDataType:kContentDataTypeStory];
+    BBMenuViewController *colorsVC = [[BBMenuViewController alloc] initWithColors:colors];
     BBMainViewController *mainVC = [[BBMainViewController alloc] init];
-    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:mainVC];
-    self.window.rootViewController = navigation;
+    BBMainNavController *navigation = [[BBMainNavController alloc] initWithRootViewController:mainVC];
+    
+    ICSDrawerController *drawer = [[ICSDrawerController alloc] initWithLeftViewController:colorsVC
+                                                                     centerViewController:navigation];
+    
+    mainVC.drawer = drawer;
+    
+    self.window.rootViewController = drawer;
     
     return YES;
 }

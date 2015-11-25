@@ -27,4 +27,9 @@
 {
     return [[self parserData:@"story"] objectForKey:key];
 }
+
++ (id)tangshiList:(NSString*) key
+{
+    return [[self parserData:@"tangshi"] objectForKey:key];
+}
 @end

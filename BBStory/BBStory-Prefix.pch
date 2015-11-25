@@ -18,10 +18,20 @@
     #import "BBFunction.h"
 #endif
 
-#define MY_BANNER_UNIT_ID       @"a15327ab3118a3e"
+#define PLATFORMSTATUS_NOTIFICATION @"kPlatformStatusNotification"
+#define IOS7_OR_LATER	([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
+
+#define MY_BANNER_UNIT_ID       @"ca-app-pub-4220651662523392/3427502063"
 
 #define kDeviceHeight   [UIScreen mainScreen].bounds.size.height
 #define kDeviceWidth    [UIScreen mainScreen].bounds.size.width
 
 #define kGray           [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1]
 #define kPink           [UIColor colorWithRed:253/255.0 green:97/255.0 blue:151/255.0 alpha:1]
+
+#define UD_HAS_SAWNEWGAMES       @"hasSawNewGames00"
+
+#define UD_RECORDER_STORY_LIST  @"recorderStoryList"
+#define UD_RECORDER_TANGSHI_LIST  @"recorderTangshiList"
+
+#define kAppId          842439221;

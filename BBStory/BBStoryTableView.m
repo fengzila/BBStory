@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 FengZi. All rights reserved.
 //
 
+#import "BBDataManager.h"
 #import "BBStoryTableView.h"
 #import "BBStoryInfoViewController.h"
 
@@ -27,6 +28,15 @@
     return self;
 }
 
+- (void)setDarkMode:(BOOL)isDarkMode
+{
+//    if (isDarkMode) {
+//        _tableView.backgroundColor = [UIColor colorWithRed:17/255.0 green:17/255.0 blue:17/255.0 alpha:1];
+//    } else {
+//        _tableView.backgroundColor = [UIColor whiteColor];
+//    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
@@ -42,7 +52,7 @@
     {
         return 0;
     }
-    NSLog(@"count is %d", [self.data count]);
+    NSLog(@"count is %d", (int)[self.data count]);
     return [self.data count];
 }
 
@@ -78,7 +88,7 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"No.%d  %@", row+1, [data objectForKey:@"title"]];
     
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
     
     return cell;
 }

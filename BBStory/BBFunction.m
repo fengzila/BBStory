@@ -10,17 +10,18 @@
 
 @implementation BBFunction
 
-+ (void)goToAppStoreEvaluate
++ (void)goToAppStoreEvaluate:(int)appId
 {
-    NSURL *url;
+    NSString *strUrl;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
     {
-        url = [NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=842439221"];
+        strUrl = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d", appId];
     }
     else
     {
-        url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id842439221?at=10l6dK"];
+        strUrl = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%d?at=10l6dK", appId];
     }
+    NSURL *url = [NSURL URLWithString:strUrl];
     [[UIApplication sharedApplication] openURL:url];
 }
 @end

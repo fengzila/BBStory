@@ -6,15 +6,17 @@
 //  Copyright (c) 2014年 FengZi. All rights reserved.
 //
 
-#import "BBSegmentedControl.h"
 #import "BBStoryInfoViewController.h"
 #import "BBMainViewController.h"
 #import "BBNetworkService.h"
 #import "ChineseInclude.h"
 #import "PinYinForObjc.h"
 #import "BBCycleViewController.h"
+#import "BBDataManager.h"
 
 @interface BBMainViewController ()
+
+@property(nonatomic, strong) UIButton *openDrawerButton;
 
 @end
 
@@ -29,22 +31,58 @@
     return self;
 }
 
-
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view = view;
     view.backgroundColor = kGray;
     
-    int height = 0;
+    _statusBarHeight = 0;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
-        height = 20;
+        _statusBarHeight = 20;
     }
     self.navigationController.delegate = self;
     [self.navigationController setNavigationBarHidden:YES animated:false];
     
-    mySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0 + height, kDeviceWidth, 40)];
+    UIImage *btnMenu = [UIImage imageNamed:@"btn_menu"];
+    NSParameterAssert(btnMenu);
+    
+    self.openDrawerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.openDrawerButton.frame = CGRectMake(0.0f, _statusBarHeight + 0.0f, 44.0f, 44.0f);
+    [self.openDrawerButton setImage:btnMenu forState:UIControlStateNormal];
+    [self.openDrawerButton addTarget:self action:@selector(openDrawer:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.openDrawerButton];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSInteger hasSawNewGames = [ud integerForKey:UD_HAS_SAWNEWGAMES];
+    if (!hasSawNewGames)
+    {
+        UIImageView *tipsView = [[UIImageView alloc] initWithFrame:CGRectMake(28, 7, 10, 10)];
+        tipsView.image = [UIImage imageNamed:@"tips"];
+        [self.openDrawerButton addSubview:tipsView];
+    }
+    
+    _segTitleArr = @[@"全部", @"收藏"];
+//    _segControl = [[BBSegmentedControl alloc] initWithSectionTitles:_segTitleArr];
+//    [_segControl setFrame:CGRectMake(60, _statusBarHeight, kDeviceWidth - 120, 35)];
+//    _segControl.backgroundColor = kGray;
+//    [_segControl addTarget:self action:@selector(segContrllChange:) forControlEvents:UIControlEventValueChanged];
+//    //    [segControl setTag:1];
+//    [self.view addSubview:_segControl];
+    _segControl = [[UISegmentedControl alloc]initWithItems:_segTitleArr];
+    [_segControl setFrame:CGRectMake(90, _statusBarHeight + 2, kDeviceWidth - 180, 30)];
+    _segControl.segmentedControlStyle = UISegmentedControlStyleBar;//设置样式
+    [_segControl addTarget:self action:@selector(segContrllChange:)forControlEvents:UIControlEventValueChanged];
+    NSDictionary *normalDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:247/255.0 green:45/255.0 blue:55/255.0 alpha:1],UITextAttributeTextColor,  [UIFont fontWithName:@"Helvetica" size:12.f],UITextAttributeFont, nil];
+    NSDictionary *selectedDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,  [UIFont fontWithName:@"Helvetica" size:12.f],UITextAttributeFont, nil];
+    [_segControl setTitleTextAttributes:normalDic forState:UIControlStateNormal];
+    [_segControl setTitleTextAttributes:selectedDic forState:UIControlStateSelected];
+    _segControl.tintColor = [UIColor colorWithRed:243/255.0 green:76/255.0 blue:51/255.0 alpha:1];
+    _segControl.selectedSegmentIndex = 0;
+    [self.view addSubview:_segControl];
+    
+    mySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40)];
     mySearchBar.delegate = self;
     [mySearchBar setPlaceholder:@"搜索"];
     [self.view addSubview:mySearchBar];
@@ -54,46 +92,75 @@
     searchDisplayController.searchResultsDataSource = self;
     searchDisplayController.searchResultsDelegate = self;
     
-    _segTitleArr = @[@"全部", @"收藏"];
-    BBSegmentedControl *segControl = [[BBSegmentedControl alloc] initWithSectionTitles:_segTitleArr];
-    [segControl setFrame:CGRectMake(0, 40 + height, kDeviceWidth, 35)];
-    segControl.backgroundColor = kGray;
-    [segControl addTarget:self action:@selector(segContrllChange:) forControlEvents:UIControlEventValueChanged];
-//    [segControl setTag:1];
-    [self.view addSubview:segControl];
-    
-    _allData = [BBNetworkService storyList:@"storyList"];
-//    _loveData = [BBNetworkService storyList:@"storyList"];
-    
+    _allData = [[BBDataManager getInstance] getDataList];
     
     [self initLoveListData];
 
     
-    _allView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + height, kDeviceWidth, kDeviceHeight - 35) Data:_allData];
+    _allView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_allData];
     _allView.delegate = self;
     [self.view addSubview:_allView];
     
-    _loveView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + height, kDeviceWidth, kDeviceHeight - 35) Data:_loveData];
+    _loveView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_loveData];
     _loveView.delegate = self;
     [self.view addSubview:_loveView];
     [_loveView setHidden:YES];
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    int lastReadPage = (int)[ud integerForKey:@"lastReadPage"];
+    int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [[BBDataManager getInstance] getKeyPrefix]]];
     [_allView scrollToRowAtIndexPath:lastReadPage];
+    
+    [self loadAdBanner];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self setDarkMode:[[BBDataManager getInstance] isDarkMode]];
+}
+
+- (void)setDarkMode:(BOOL)isDarkMode
+{
+    [_allView setDarkMode:isDarkMode];
+}
+
+- (void)loadAdBanner
+{
+    
+    if (kDeviceWidth > 640) {
+        _adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeLeaderboard];
+    } else {
+        _adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    }
+    CGRect frame = _adBannerView.frame;
+    _adBannerView.frame = CGRectMake(kDeviceWidth/2 - frame.size.width/2, -frame.size.height, frame.size.width, frame.size.height);
+    
+    // Specify the ad unit ID.
+    _adBannerView.adUnitID = MY_BANNER_UNIT_ID;
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    _adBannerView.rootViewController = self;
+    [self.view addSubview:_adBannerView];
+    
+    // Initiate a generic request to load it with an ad.
+    [_adBannerView loadRequest:[GADRequest request]];
 }
 
 - (void) initLoveListData
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSDictionary *loveDic = [ud objectForKey:@"loveDic"];
+    NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
     _loveData = [[NSMutableArray alloc] init];
     
     NSArray *keys = [loveDic allKeys];
     int i;
     id key;
 
-    _loveDicCount = [keys count];
+    _loveDicCount = (int)[keys count];
 
     for (i = 0; i < _loveDicCount; i++)
     {
@@ -111,16 +178,16 @@
 //        [navigationController setNavigationBarHidden:YES animated:animated];
         
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSDictionary *loveDic = [ud objectForKey:@"loveDic"];
+        NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
         
-        int count = [[loveDic allKeys] count];
+        int count = (int)[[loveDic allKeys] count];
         
         if (count != _loveDicCount) {
             [self initLoveListData];
             [_loveView reloadData:_loveData];
         }
         
-        int lastReadPage = (int)[ud integerForKey:@"lastReadPage"];
+        int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [[BBDataManager getInstance] getKeyPrefix]]];
         [_allView scrollToRowAtIndexPath:lastReadPage];
     }
     else if ([navigationController isNavigationBarHidden])
@@ -129,10 +196,10 @@
     }
 }
 
-- (void)segContrllChange:(BBSegmentedControl*)seg
+- (void)segContrllChange:(UISegmentedControl*)seg
 {
-    NSLog(@"Selected index %i (via UIControlEventValueChanged)", seg.selectedIndex);
-    switch (seg.selectedIndex)
+    NSLog(@"Selected index %li (via UIControlEventValueChanged)", (long)seg.selectedSegmentIndex);
+    switch (seg.selectedSegmentIndex)
     {
         case 0:
             [_allView setHidden:NO];
@@ -156,6 +223,7 @@
 //    BBStoryInfoViewController *infoVC = [[BBStoryInfoViewController alloc] initWithData:data];
     
     BBCycleViewController *infoVC = [[BBCycleViewController alloc] initWithData:data index:index];
+    infoVC.drawer = self.drawer;
     
     [self.navigationController pushViewController:infoVC animated:YES];
 }
@@ -237,6 +305,8 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+//    mySearchBar.frame = CGRectMake(0, _statusBarHeight, kDeviceWidth, 40);
+    
     searchBar.showsCancelButton = YES;
     for(id cc in [searchBar subviews])
     {
@@ -246,6 +316,57 @@
             [btn setTitle:@"取消"  forState:UIControlStateNormal];
         }
     }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+//    mySearchBar.frame = CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40);
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+//    mySearchBar.frame = CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40);
+}
+
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
+{
+    
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+}
+
+#pragma mark - Configuring the view’s layout behavior
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+#pragma mark - ICSDrawerControllerPresenting
+
+- (void)drawerControllerWillOpen:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = NO;
+}
+
+- (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = YES;
+}
+
+#pragma mark - Open drawer button
+
+- (void)openDrawer:(id)sender
+{
+    [self.drawer open];
 }
 
 - (void)viewDidLoad

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BBStoryInfoView.h"
 
 @class BBMaterialView;
 @class BBStepView;
@@ -17,25 +18,22 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 
 @end
-@interface BBCycleScrollCell : UIView<UIScrollViewDelegate>
+@interface BBCycleScrollCell : UIView<UIScrollViewDelegate, UIWebViewDelegate>
 {
 @private
-    UIScrollView            *_baseView;
-    UIView                  *_bgView;
-    UIImageView             *_imageView;
-    UILabel                 *_pageIndexLabel;
-    UILabel                 *_titleLabel;
-    UILabel                 *_contentLabel;
-    UILabel                 *_materialTitleLabel;
-    BBMaterialView          *_materialView;
-    UILabel                 *_stepTitleLabel;
-    BBStepView              *_stepView;
-    
-    NSArray                 *_colorTheme;
-    int                     _tapNum;
+    UIScrollView *_baseView;
+    UIImageView *_imageView;
+    UILabel *_pageIndexLabel;
+    UILabel *_titleLabel;
+    UILabel *_contentLabel;
+    UIWebView *_contentWebView;
+    UIView *_bgView;
+    NSDictionary *_data;
 }
 
 @property (nonatomic) id <BBCycleScrollCellDelegate> delegate;
 - (void)loadData:(NSDictionary*)data;
 - (void)goTop;
+- (void)setContentFontSize:(int)fontSize;
+- (void)setDarkMode:(BOOL)isDarkMode;
 @end

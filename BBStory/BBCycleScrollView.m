@@ -80,7 +80,7 @@
         [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     }
     
-    [self getDisplayImagesWithCurpage:_curPage];
+    [self getDisplayImagesWithCurpage:(int)_curPage];
     
     for (int i = 0; i < 3; i++)
     {
@@ -90,6 +90,7 @@
                                                                                     action:@selector(handleTap:)];
         [v addGestureRecognizer:singleTap];
         v.frame = CGRectOffset(v.frame, v.frame.size.width * i, 0);
+        v.tag = i+1;
         [_scrollView addSubview:v];
     }
     
@@ -112,7 +113,12 @@
     [_curViews removeAllObjects];
     
     [_curViews addObject:[_datasource pageAtIndex:pre]];
-    [_curViews addObject:[_datasource pageAtIndex:page]];
+    if (_targetView != nil) {
+        _targetView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
+        [_curViews addObject:_targetView];
+    } else {
+        [_curViews addObject:[_datasource pageAtIndex:page]];
+    }
     [_curViews addObject:[_datasource pageAtIndex:last]];
 }
 
@@ -122,17 +128,17 @@
     if(value == -1) value = _totalPages - 1;
     if(value == _totalPages) value = 0;
     
-    return value;
+    return (int)value;
     
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
 {
     
-    if ([_delegate respondsToSelector:@selector(didClickPage:atIndex:)])
-    {
-        [_delegate didClickPage:self atIndex:_curPage];
-    }
+//    if ([_delegate respondsToSelector:@selector(didClickPage:atIndex:)])
+//    {
+//        [_delegate didClickPage:self atIndex:_curPage];
+//    }
     
 }
 
@@ -163,6 +169,9 @@
     if(x >= (2*self.frame.size.width))
     {
         _curPage = [self validPageValue:_curPage + 1];
+        [_targetView removeFromSuperview];
+        _targetView = nil;
+        _targetView = [_curViews objectAtIndex:2];
         [self loadData];
     }
     
@@ -170,6 +179,9 @@
     if(x <= 0)
     {
         _curPage = [self validPageValue:_curPage - 1];
+        [_targetView removeFromSuperview];
+        _targetView = nil;
+        _targetView = [_curViews objectAtIndex:0];
         [self loadData];
     }
 }
@@ -231,6 +243,24 @@
     
     
 //    _scrollView.bouncesZoom = NO;
+}
+
+- (void)setContentFontSize:(int)fontSize
+{
+    for (int i = 0; i < 3; i++)
+    {
+        BBCycleScrollCell *v = [_curViews objectAtIndex:i];
+        [v setContentFontSize:fontSize];
+    }
+}
+
+- (void)setDarkMode:(BOOL)isDarkMode
+{
+    for (int i = 0; i < 3; i++)
+    {
+        BBCycleScrollCell *v = [_curViews objectAtIndex:i];
+        [v setDarkMode:isDarkMode];
+    }
 }
 
 - (void)goTop

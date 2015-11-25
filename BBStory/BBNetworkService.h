@@ -11,5 +11,6 @@
 @interface BBNetworkService : NSObject
 
 + (id)storyList:(NSString*) key;
++ (id)tangshiList:(NSString*) key;
 
 @end

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface BBFunction : NSObject
-+ (void)goToAppStoreEvaluate;
++ (void)goToAppStoreEvaluate:(int)appId;
 @end

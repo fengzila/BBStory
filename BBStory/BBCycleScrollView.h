@@ -12,7 +12,7 @@
 @protocol BBCycleScrollViewDelegate <NSObject>
 
 @optional
-- (void)didClickPage:(BBCycleScrollView *)csView atIndex:(NSInteger)index;
+//- (void)didClickPage:(BBCycleScrollView *)csView atIndex:(NSInteger)index;
 - (void)changePage;
 @end
 
@@ -31,6 +31,8 @@
     
     id<BBCycleScrollViewDelegate> _delegate;
     id<BBCycleScrollViewDatasource> _datasource;
+    
+    UIView *_targetView;
     
     NSInteger _totalPages;
     
@@ -54,6 +56,8 @@
 - (void)roll;
 - (void)stopRoll;
 - (void)goTop;
+- (void)setContentFontSize:(int)fontSize;
+- (void)setDarkMode:(BOOL)isDarkMode;
 
 @end
 

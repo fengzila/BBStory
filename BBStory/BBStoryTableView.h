@@ -28,5 +28,6 @@
 - (id)initWithFrame:(CGRect)frame Data:(NSArray*)data;
 - (void)reloadData:(NSArray*)data;
 - (void)scrollToRowAtIndexPath:(int)row;
+- (void)setDarkMode:(BOOL)isDarkMode;
 
 @end
