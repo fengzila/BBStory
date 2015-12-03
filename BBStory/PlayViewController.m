@@ -13,6 +13,7 @@
 #import "BBBannerManager.h"
 #import "BBDataManager.h"
 #import "MobClick.h"
+#import "UMOnlineConfig.h"
 
 #define degressToRadian(x) (M_PI * (x)/180.0)
 #define ADViewHeight 0
@@ -369,7 +370,7 @@
     [self configNowPlayingInfoCenter];
     
     BBRecorderObject *data = [_data objectAtIndex:_index];
-    [MobClick event:@"playRecorder" attributes:@{@"recorderId" : data.recorderId, @"name" : data.name}];
+    [MobClick event:@"playRecorder" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", data.recorderId], @"name" : data.name}];
 }
 
 // 暂停
@@ -486,11 +487,11 @@
     NSInteger hasEvaluated = [ud integerForKey:@"hasEvaluated"];
     if (!hasEvaluated)
     {
-        int rate = [[MobClick getConfigParams:@"evaluateAlertRate"] intValue];
+        int rate = [[UMOnlineConfig getConfigParams:@"evaluateAlertRate"] intValue];
         int value = (arc4random() % 100) + 0;
         if (value <= rate)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[MobClick getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[MobClick getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[MobClick getConfigParams:@"evaluateAlertConfirmTitle"], nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[UMOnlineConfig getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[UMOnlineConfig getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[UMOnlineConfig getConfigParams:@"evaluateAlertConfirmTitle"], nil];
             [alert show];
         }
     }

@@ -57,9 +57,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        /*此处处理自己的代码，如删除数据*/
-        /*删除tableView中的一行*/
-        BBRecorderObject *data = [_data objectAtIndex:[_data count] - [indexPath row] - 1];
+        NSUInteger index = [_data count] - [indexPath row] - 1;
+        BBRecorderObject *data = [_data objectAtIndex:index];
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *recorderName = [NSString stringWithFormat:@"%@/story_%@.caf", docDir, data.recorderId];
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -68,9 +67,24 @@
         {
             [fileManager removeItemAtPath:recorderName error:NULL];
         }
-        [_data removeObjectAtIndex:[indexPath row]];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:_data] forKey:_recorderListKey];
+        [_data removeObjectAtIndex:index];
+        NSString *recorderListKey;
+        switch ([[BBDataManager getInstance] getCurContentDataType]) {
+            case kContentDataTypeStory:
+                recorderListKey = UD_RECORDER_STORY_LIST;
+                break;
+            case kContentDataTypeTangshi:
+                recorderListKey = UD_RECORDER_TANGSHI_LIST;
+                break;
+                
+            default:
+                break;
+        }
+        if ([recorderListKey length] > 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:_data] forKey:recorderListKey];
+        }
         [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
     }  
 }
 

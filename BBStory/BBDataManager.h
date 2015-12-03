@@ -8,6 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ICSDrawerController.h"
 
 typedef enum {
     kContentDataTypeStory = 0,
@@ -20,6 +21,7 @@ typedef enum {
     int _tapNum;
     BOOL _isDarkMode;
     int _contentFontSize;
+    ICSDrawerController *_drawer;
 }
 
 
@@ -34,4 +36,6 @@ typedef enum {
 -(BOOL)isDarkMode;
 -(void)setContentFontSize:(int)fontSize;
 -(int)getContentFontSize;
+-(void)setDrawer:(ICSDrawerController*)drawer;
+-(ICSDrawerController*)getDrawer;
 @end

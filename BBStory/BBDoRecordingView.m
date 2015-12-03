@@ -319,7 +319,7 @@
         [array addObject:recorderObj];
         [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:array] forKey:_saveKey];
         
-        [MobClick event:@"touchRecorderEndBtn" attributes:@{@"recorderId" : [_data objectForKey:@"id"], @"name" : [_data objectForKey:@"title"]}];
+        [MobClick event:@"touchRecorderEndBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [_data objectForKey:@"id"]], @"name" : [_data objectForKey:@"title"]}];
     } else {
         // 开始录音
         _recorderDuration = 0.0f;
@@ -350,7 +350,7 @@
         
         [_avAudioPlayer setCurrentTime:0];
         
-        [MobClick event:@"touchRecorderBeginBtn" attributes:@{@"recorderId" : [_data objectForKey:@"id"], @"name" : [_data objectForKey:@"title"]}];
+        [MobClick event:@"touchRecorderBeginBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [_data objectForKey:@"id"]], @"name" : [_data objectForKey:@"title"]}];
     }
     
     _isRecording = !_isRecording;

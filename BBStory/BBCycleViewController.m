@@ -8,8 +8,8 @@
 
 #import "BBCycleViewController.h"
 #import "MobClick.h"
+#import "UMOnlineConfig.h"
 #import "BBDataManager.h"
-#import "BTPlatform.h"
 #import "BBBannerManager.h"
 #import "BBMainViewController.h"
 
@@ -131,7 +131,7 @@
     BBDoRecordingView* doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) Data:curData];
     [self.view addSubview:doRecordingView];
     [doRecordingView showWithAnimation];
-    [MobClick event:@"touchRecorderShowBtn" attributes:@{@"recorderId" : [curData objectForKey:@"id"], @"name" : [curData objectForKey:@"title"]}];
+    [MobClick event:@"touchRecorderShowBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [curData objectForKey:@"id"]], @"name" : [curData objectForKey:@"title"]}];
 }
 
 - (void)loveAction
@@ -142,11 +142,11 @@
         NSInteger hasEvaluated = [ud integerForKey:@"hasEvaluated"];
         if (!hasEvaluated)
         {
-            int rate = [[MobClick getConfigParams:@"evaluateAlertRate"] intValue];
+            int rate = [[UMOnlineConfig getConfigParams:@"evaluateAlertRate"] intValue];
             int value = (arc4random() % 100) + 0;
             if (value <= rate)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[MobClick getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[MobClick getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[MobClick getConfigParams:@"evaluateAlertConfirmTitle"], nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[UMOnlineConfig getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[UMOnlineConfig getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[UMOnlineConfig getConfigParams:@"evaluateAlertConfirmTitle"], nil];
                 [alert show];
             }
         }
@@ -176,6 +176,7 @@
             // 要被收藏的
             [_loveBtn setBackgroundImage:[UIImage imageNamed:@"btn_loved"] forState:UIControlStateNormal];
             [dynamicLoveDic setValue:@1 forKey:k];
+            [MobClick event:@"touchLoveBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [curData objectForKey:@"id"]], @"name" : [curData objectForKey:@"title"]}];
         } else {
             [_loveBtn setBackgroundImage:[UIImage imageNamed:@"btn_unlove"] forState:UIControlStateNormal];
             [dynamicLoveDic removeObjectForKey:k];

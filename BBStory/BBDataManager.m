@@ -75,10 +75,12 @@
     }
     return nil;
 }
+
 -(void)changeColor
 {
     _tapNum++;
 }
+
 -(int)getColorIndex
 {
     return _tapNum;
@@ -90,18 +92,31 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setBool:isDarkMode forKey:@"isDarkMode"];
 }
+
 -(BOOL)isDarkMode
 {
     return _isDarkMode;
 }
+
 -(void)setContentFontSize:(int)fontSize;
 {
     _contentFontSize = fontSize;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:fontSize forKey:@"contentFontSize"];
 }
+
 -(int)getContentFontSize
 {
     return _contentFontSize;
+}
+
+-(void)setDrawer:(ICSDrawerController*)drawer
+{
+    _drawer = drawer;
+}
+
+-(ICSDrawerController*)getDrawer
+{
+    return _drawer;
 }
 @end

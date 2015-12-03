@@ -24,16 +24,15 @@
 
 #import "ICSDrawerController.h"
 
-@interface BBMenuViewController : UITableViewController<ICSDrawerControllerChild, ICSDrawerControllerPresenting>
+@interface BBMenuViewController : UIViewController<ICSDrawerControllerChild, ICSDrawerControllerPresenting, UITableViewDataSource,UITableViewDelegate>
 {
 @private
     NSArray *_menuArr;
     NSArray *_menuImgArr;
     NSArray *_menuImgLightArr;
+    UITableView* _tableView;
 }
 
 @property(nonatomic, weak) ICSDrawerController *drawer;
-
-- (id)initWithColors:(NSArray *)colors;
 
 @end

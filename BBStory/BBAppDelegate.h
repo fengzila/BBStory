@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GADInterstitial.h>
 
-@interface BBAppDelegate : UIResponder <UIApplicationDelegate>
+@interface BBAppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property(nonatomic, strong) GADInterstitial *interstitial;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

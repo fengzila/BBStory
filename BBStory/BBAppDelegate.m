@@ -9,12 +9,13 @@
 #import "BBAppDelegate.h"
 #import "BBMainViewController.h"
 #import "MobClick.h"
+#import "UMOnlineConfig.h"
 #import "ICSDrawerController.h"
 #import "BBMenuViewController.h"
 #import "BBMainNavController.h"
 #import "BBNetworkService.h"
 #import "BBDataManager.h"
-#import "BTPlatform.h"
+#import "UMCommunity.h"
 
 @implementation BBAppDelegate
 
@@ -31,21 +32,17 @@
     
     [MobClick startWithAppkey:@"5322c5df56240b031a0d715c"];
 //    [MobClick startWithAppkey:@"5322c5df56240b031a0d715c" reportPolicy:REALTIME channelId:nil];
-    [MobClick updateOnlineConfig];
+    [UMOnlineConfig updateOnlineConfigWithAppkey:@"5322c5df56240b031a0d715c"];
 //    [MobClick setLogEnabled:YES];
+    [UMCommunity setWithAppKey:@"5322c5df56240b031a0d715c"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    NSArray *colors = @[[UIColor colorWithRed:237.0f/255.0f green:195.0f/255.0f blue:0.0f/255.0f alpha:1.0f],
-                        [UIColor colorWithRed:237.0f/255.0f green:147.0f/255.0f blue:0.0f/255.0f alpha:1.0f],
-                        [UIColor colorWithRed:237.0f/255.0f green:9.0f/255.0f blue:0.0f/255.0f alpha:1.0f]
-                        ];
-    
     [[BBDataManager getInstance] setCurContentDataType:kContentDataTypeStory];
-    BBMenuViewController *colorsVC = [[BBMenuViewController alloc] initWithColors:colors];
+    BBMenuViewController *colorsVC = [[BBMenuViewController alloc] init];
     BBMainViewController *mainVC = [[BBMainViewController alloc] init];
     BBMainNavController *navigation = [[BBMainNavController alloc] initWithRootViewController:mainVC];
     
@@ -54,7 +51,20 @@
     
     mainVC.drawer = drawer;
     
+    [[BBDataManager getInstance] setDrawer:drawer];
+    
     self.window.rootViewController = drawer;
+    
+    NSData* storyData  = [[NSUserDefaults standardUserDefaults] objectForKey:UD_RECORDER_STORY_LIST];
+    NSData* tangshiData  = [[NSUserDefaults standardUserDefaults] objectForKey:UD_RECORDER_TANGSHI_LIST];
+    int openInterstitial = [[UMOnlineConfig getConfigParams:@"openInterstitial"] intValue];
+    if (openInterstitial > 0 && ([storyData length] > 0 || [tangshiData length] > 0)) {
+        self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-4220651662523392/9866073260"];
+        self.interstitial.delegate = self;
+        
+        GADRequest *request = [GADRequest request];
+        [self.interstitial loadRequest:request];
+    }
     
     return YES;
 }
@@ -180,6 +190,40 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+/// Called when an interstitial ad request succeeded.
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    NSLog(@"interstitialDidReceiveAd");
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self.window.rootViewController];
+    }
+}
+
+/// Called when an interstitial ad request failed.
+- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"interstitialDidFailToReceiveAdWithError: %@", [error localizedDescription]);
+}
+
+/// Called just before presenting an interstitial.
+- (void)interstitialWillPresentScreen:(GADInterstitial *)ad {
+    NSLog(@"interstitialWillPresentScreen");
+}
+
+/// Called before the interstitial is to be animated off the screen.
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad {
+    NSLog(@"interstitialWillDismissScreen");
+}
+
+/// Called just after dismissing an interstitial and it has animated off the screen.
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    NSLog(@"interstitialDidDismissScreen");
+}
+
+/// Called just before the application will background or terminate because the user clicked on an
+/// ad that will launch another application (such as the App Store).
+- (void)interstitialWillLeaveApplication:(GADInterstitial *)ad {
+    NSLog(@"interstitialWillLeaveApplication");
 }
 
 @end

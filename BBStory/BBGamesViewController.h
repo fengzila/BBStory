@@ -22,11 +22,8 @@
 //  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "ICSDrawerController.h"
 
-
-
-@interface BBGamesViewController : UIViewController<ICSDrawerControllerChild, ICSDrawerControllerPresenting, UIWebViewDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface BBGamesViewController : UIViewController<UIWebViewDelegate, UITableViewDataSource,UITableViewDelegate>
 {
 @private
     NSArray         *_titleArr;
@@ -36,6 +33,5 @@
 }
 
 @property(nonatomic,retain) UITableView *tableView;
-@property(nonatomic, weak) ICSDrawerController *drawer;
 
 @end

@@ -9,7 +9,6 @@
 #import "BBBannerManager.h"
 #import <GoogleMobileAds/GADBannerView.h>
 #import "BBAdmobBanner.h"
-#import "BBBaitongBanner.h"
 
 @implementation BBBannerManager
 + (id)getInstance
@@ -30,7 +29,6 @@
         _banner = [[BBAdmobBanner alloc] init];
     } else {
         _bannerType = kBaitong;
-        _banner = [[BBBaitongBanner alloc] init];
     }
     [_banner requestWithViewController:vc];
 }
@@ -42,11 +40,6 @@
 -(void)hideWithAnimationDuration:(CGFloat)durationTime
 {
     [_banner hideWithAnimationDuration:durationTime];
-}
-
--(void)showBaitongWall
-{
-    [[[BBBaitongBanner alloc] init] showWall];
 }
 
 @end

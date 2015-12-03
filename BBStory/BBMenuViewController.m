@@ -23,7 +23,6 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "BBMenuViewController.h"
-#import "BBGamesViewController.h"
 #import "BBFunction.h"
 #import "BBMainViewController.h"
 #import "BBMainNavController.h"
@@ -32,6 +31,9 @@
 #import "BBNetworkService.h"
 #import "BBDataManager.h"
 #import "BBBannerManager.h"
+#import "MobClick.h"
+#import "BBFindNavController.h"
+#import "BBFindController.h"
 
 static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewControllerCellReuseId";
 
@@ -39,7 +41,6 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
 
 @interface BBMenuViewController ()
 
-@property(nonatomic, strong) NSArray *colors;
 @property(nonatomic, assign) NSInteger previousRow;
 
 @end
@@ -48,20 +49,9 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
 
 @implementation BBMenuViewController
 
-- (id)initWithColors:(NSArray *)colors
-{
-    NSParameterAssert(colors);
-    
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
-        _colors = colors;
-    }
-    return self;
-}
-
 - (void)initData
 {
-    _menuArr = @[@"   小故事", @"   唐诗", @"   我的录音", @"   游乐场", @"   五星好评^_^"];
+    _menuArr = @[@"   小故事", @"   唐诗", @"   我的录音", @"   发现", @"   五星好评^_^"];
     _menuImgArr = @[@"menu_smallStory", @"menu_smallStory", @"menu_recorder", @"menu_game", @"menu_rate"];
     _menuImgLightArr = @[@"menu_smallStory_light", @"menu_smallStory_light", @"menu_recorder_light", @"menu_game_light", @"menu_rate_light"];
 }
@@ -73,25 +63,22 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
     [self initData];
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:29.0f/255.0f green:33.0f/255.0f blue:40.0f/255.0f alpha:1.0f];
-//    self.view.backgroundColor = [UIColor whiteColor];
-
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kICSColorsViewControllerCellReuseId];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = [UIColor colorWithRed:35/255.0
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.separatorColor = [UIColor colorWithRed:35/255.0
                                                     green:39/255.0
                                                      blue:48/255.0
                                                     alpha:1
                                      ];
+    _tableView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tableView];
     
-    int logoHeightPadding;
-    if (kDeviceHeight <= 480.0f) {
-        logoHeightPadding = 190;
-    } else {
-        logoHeightPadding = 230;
-    }
-    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kDeviceHeight - logoHeightPadding, 250, 250)];
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 250, 153)];
     logoView.image = [UIImage imageNamed:@"logo"];
-    [logoView setAlpha:0.825f];
+//    [logoView setAlpha:0.825f];
     [self.view addSubview:logoView];
 }
 
@@ -133,8 +120,15 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
     
     if(section == 0)
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kICSColorsViewControllerCellReuseId
-                                                                forIndexPath:indexPath];
+        static NSString *CellWithIdentifier = @"localCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellWithIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
         
         cell.textLabel.text = [_menuArr objectAtIndex:row];
         cell.textLabel.font = [UIFont systemFontOfSize:16];
@@ -188,12 +182,6 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
         [self.drawer close];
     }
     else {
-        // Reload the current center view controller and update its background color
-//        typeof(self) __weak weakSelf = self;
-//        [self.drawer reloadCenterViewControllerUsingBlock:^(){
-//            NSParameterAssert(weakSelf.colors);
-//            weakSelf.drawer.centerViewController.view.backgroundColor = weakSelf.colors[indexPath.row];
-//        }];
         switch (row) {
             case 0:
             {
@@ -221,19 +209,19 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
                 [self.drawer replaceCenterViewControllerWithViewController:navigation];
             }
                 break;
+                
             case 3:
             {
-                NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-                [ud setInteger:1 forKey:UD_HAS_SAWNEWGAMES];
-                // Replace the current center view controller with a new one
-                BBGamesViewController *center = [[BBGamesViewController alloc] init];
-//                center.view.backgroundColor = [UIColor redColor];
-                [self.drawer replaceCenterViewControllerWithViewController:center];
-//                [[BBBannerManager getInstance] showBaitongWall];
+//                UINavigationController *communityViewController = [UMCommunity getFeedsModalViewController];
+//                [self.drawer replaceCenterViewControllerWithViewController:communityViewController];
+                BBFindController *findVC = [[BBFindController alloc] init];
+                BBFindNavController *navigation = [[BBFindNavController alloc] initWithRootViewController:findVC];
+                [self.drawer replaceCenterViewControllerWithViewController:navigation];
             }
                 break;
                 
             case 4:
+                [MobClick event:@"btn_menu_rate"];
                 [BBFunction goToAppStoreEvaluate:842439221];
                 break;
                 
@@ -242,7 +230,7 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
         }
         if (row != 4) {
             self.previousRow = row;
-            [self.tableView reloadData];
+            [_tableView reloadData];
         }
     }
 }

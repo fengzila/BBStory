@@ -39,7 +39,7 @@
     _data = data;
     [self refresh];
     
-    [MobClick event:@"read" attributes:@{@"recorderId" : [_data objectForKey:@"id"], @"name" : [_data objectForKey:@"title"]}];
+    [MobClick event:@"read" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [_data objectForKey:@"id"]], @"name" : [_data objectForKey:@"title"]}];
 }
 
 - (void)refresh

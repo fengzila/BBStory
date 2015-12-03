@@ -26,6 +26,7 @@
 #import "CustomURLCache.h"
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BBDataManager.h"
 
 static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewControllerCellReuseId";
 
@@ -53,13 +54,10 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
         statusBarHeight = 20;
     }
     
-    // Initialize and add the openDrawerButton
-    UIImage *hamburger = [UIImage imageNamed:@"btn_menu"];
-    NSParameterAssert(hamburger);
-    
     self.openDrawerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.openDrawerButton.frame = CGRectMake(10.0f, statusBarHeight + 0.0f, 44.0f, 44.0f);
-    [self.openDrawerButton setImage:hamburger forState:UIControlStateNormal];
+    [self.openDrawerButton setImage:[UIImage imageNamed:@"btn_backTop@2x"] forState:UIControlStateNormal];
+    [self.openDrawerButton setImage:[UIImage imageNamed:@"btn_backTopLight@2x"] forState:UIControlStateHighlighted];
     [self.openDrawerButton addTarget:self action:@selector(openDrawer:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.openDrawerButton];
@@ -91,9 +89,9 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    
+    [[BBDataManager getInstance] getDrawer].DisEnableTouchMove = YES;
 }
-
-
 
 - (void)initData
 {
@@ -117,23 +115,12 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
     return NO;
 }
 
-#pragma mark - ICSDrawerControllerPresenting
-
-- (void)drawerControllerWillOpen:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = NO;
-}
-
-- (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = YES;
-}
-
 #pragma mark - Open drawer button
 
 - (void)openDrawer:(id)sender
 {
-    [self.drawer open];
+    [[BBDataManager getInstance] getDrawer].DisEnableTouchMove = NO;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
