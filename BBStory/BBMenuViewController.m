@@ -27,7 +27,6 @@
 #import "BBMainViewController.h"
 #import "BBMainNavController.h"
 #import "BBRecordListController.h"
-#import "BBRecorderNavController.h"
 #import "BBNetworkService.h"
 #import "BBDataManager.h"
 #import "BBBannerManager.h"
@@ -203,10 +202,6 @@ static NSString * const kICSColorsViewControllerCellReuseId = @"kICSColorsViewCo
                 break;
             case 2:
             {
-                BBRecordListController *recordListVC = [[BBRecordListController alloc] init];
-                recordListVC.drawer = self.drawer;
-                BBRecorderNavController *navigation = [[BBRecorderNavController alloc] initWithRootViewController:recordListVC];
-                [self.drawer replaceCenterViewControllerWithViewController:navigation];
             }
                 break;
                 

@@ -42,7 +42,7 @@
     self.font = [UIFont systemFontOfSize:14];
     self.textColor = [UIColor blackColor];
     self.backgroundColor = [UIColor whiteColor];
-    self.selectionIndicatorColor = kPink;
+    self.selectionIndicatorColor = [UIColor colorWithRed:253/255.0 green:97/255.0 blue:151/255.0 alpha:1];
     
     self.selectedIndex = 0;
     self.segmentEdgeInset = UIEdgeInsetsMake(0, 5, 0, 5);

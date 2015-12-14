@@ -27,12 +27,11 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BBDataManager.h"
+#import "BBTabbarViewController.h"
 
 static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewControllerCellReuseId";
 
 @interface BBGamesViewController ()
-
-@property(nonatomic, strong) UIButton *openDrawerButton;
 
 @end
 
@@ -53,14 +52,6 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
     {
         statusBarHeight = 20;
     }
-    
-    self.openDrawerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.openDrawerButton.frame = CGRectMake(10.0f, statusBarHeight + 0.0f, 44.0f, 44.0f);
-    [self.openDrawerButton setImage:[UIImage imageNamed:@"btn_backTop@2x"] forState:UIControlStateNormal];
-    [self.openDrawerButton setImage:[UIImage imageNamed:@"btn_backTopLight@2x"] forState:UIControlStateHighlighted];
-    [self.openDrawerButton addTarget:self action:@selector(openDrawer:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.openDrawerButton];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, statusBarHeight + 10, kDeviceWidth, 25)];
     titleLabel.backgroundColor = [UIColor clearColor];
@@ -101,28 +92,16 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
     _appIdArr = @[@943437782, @1022010323, @950315051, @949241639, @882303787, @876313246, @1028790543];
 }
 
-#pragma mark - Configuring the view’s layout behavior
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    // Even if this view controller hides the status bar, implementing this method is still needed to match the center view controller's
-    // status bar style to avoid a flicker when the drawer is dragged and then left to open.
-    return UIStatusBarStyleDefault;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-
-#pragma mark - Open drawer button
-
-- (void)openDrawer:(id)sender
-{
-    [[BBDataManager getInstance] getDrawer].DisEnableTouchMove = NO;
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    if (viewController == self)
+//    {
+//        [[BBBaseViewController mainVCInstance] hideTabBarWithAnimationDuration:0.6];
+//        [navigationController setNavigationBarHidden:NO animated:animated];
+//    } else {
+//        [navigationController setNavigationBarHidden:YES animated:animated];
+//    }
+//}
 
 #pragma mark - webview
 

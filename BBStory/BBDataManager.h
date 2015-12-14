@@ -22,6 +22,7 @@ typedef enum {
     BOOL _isDarkMode;
     int _contentFontSize;
     ICSDrawerController *_drawer;
+    NSMutableArray *_categoryDataList;
 }
 
 
@@ -38,4 +39,5 @@ typedef enum {
 -(int)getContentFontSize;
 -(void)setDrawer:(ICSDrawerController*)drawer;
 -(ICSDrawerController*)getDrawer;
+-(NSMutableArray*)getCategoryDataList;
 @end

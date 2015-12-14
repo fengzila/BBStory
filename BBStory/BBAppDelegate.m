@@ -7,7 +7,7 @@
 //
 
 #import "BBAppDelegate.h"
-#import "BBMainViewController.h"
+#import "BBTabbarViewController.h"
 #import "MobClick.h"
 #import "UMOnlineConfig.h"
 #import "ICSDrawerController.h"
@@ -41,19 +41,27 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [[BBDataManager getInstance] setCurContentDataType:kContentDataTypeStory];
-    BBMenuViewController *colorsVC = [[BBMenuViewController alloc] init];
-    BBMainViewController *mainVC = [[BBMainViewController alloc] init];
-    BBMainNavController *navigation = [[BBMainNavController alloc] initWithRootViewController:mainVC];
+//    [[BBDataManager getInstance] setCurContentDataType:kContentDataTypeStory];
+//    BBMenuViewController *colorsVC = [[BBMenuViewController alloc] init];
+//    BBMainViewController *mainVC = [[BBMainViewController alloc] init];
+//    BBMainNavController *navigation = [[BBMainNavController alloc] initWithRootViewController:mainVC];
+//    
+//    ICSDrawerController *drawer = [[ICSDrawerController alloc] initWithLeftViewController:colorsVC
+//                                                                     centerViewController:navigation];
+//    
+//    mainVC.drawer = drawer;
+//    
+//    [[BBDataManager getInstance] setDrawer:drawer];
+//    
+//    self.window.rootViewController = drawer;
     
-    ICSDrawerController *drawer = [[ICSDrawerController alloc] initWithLeftViewController:colorsVC
-                                                                     centerViewController:navigation];
+//    BBBaseViewController *baseVC = [[BBBaseViewController alloc] init];
+//    self.window.rootViewController = baseVC;
     
-    mainVC.drawer = drawer;
-    
-    [[BBDataManager getInstance] setDrawer:drawer];
-    
-    self.window.rootViewController = drawer;
+    UIViewController *rootViewController;
+    rootViewController = [[BBTabbarViewController alloc] init];
+    self.navigationController = [[BBNavigationController alloc] initWithRootViewController:rootViewController];
+    self.window.rootViewController = self.navigationController;
     
     NSData* storyData  = [[NSUserDefaults standardUserDefaults] objectForKey:UD_RECORDER_STORY_LIST];
     NSData* tangshiData  = [[NSUserDefaults standardUserDefaults] objectForKey:UD_RECORDER_TANGSHI_LIST];

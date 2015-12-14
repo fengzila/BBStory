@@ -13,7 +13,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import <CoreData/CoreData.h>
+#import <CoreData/CoreData.h>
     #import "UIViewExt.h"
     #import "BBFunction.h"
 #endif
@@ -26,8 +26,9 @@
 #define kDeviceHeight   [UIScreen mainScreen].bounds.size.height
 #define kDeviceWidth    [UIScreen mainScreen].bounds.size.width
 
-#define kGray           [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1]
-#define kPink           [UIColor colorWithRed:253/255.0 green:97/255.0 blue:151/255.0 alpha:1]
+#define kGray                       [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1]
+#define kTabbarFontColor            [UIColor colorWithRed:252/255.0 green:88/255.0 blue:50/255.0 alpha:1]
+#define kTabbarHightFontColor       [UIColor colorWithRed:149/255.0 green:149/255.0 blue:149/255.0 alpha:1]
 
 #define UD_HAS_SAWNEWGAMES       @"hasSawNewGames00"
 

@@ -10,6 +10,7 @@
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
 #import <MediaPlayer/MPMediaItem.h>
 #import <AVFoundation/AVFoundation.h>
+#import <GoogleMobileAds/GADBannerView.h>
 #import "BBBannerManager.h"
 #import "BBDataManager.h"
 #import "MobClick.h"
@@ -75,12 +76,11 @@
 
     [self initControBtns];
     
-    [self initBottomBar];
+//    [self initBottomBar];
     
     [self updatePlayerSetting];
     
-    [[BBBannerManager getInstance] requestWithViewController:self];
-    [[BBBannerManager getInstance] showWithAnimationDuration:0.1f];
+    [self loadBanner];
     
     // 用NSTimer来监控音频播放进度
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self
@@ -100,21 +100,40 @@
     return YES;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self becomeFirstResponder];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
 }
 
--(void)configNowPlayingInfoCenter{
+-(void)loadBanner
+{
+    GADBannerView *adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    CGRect frame = adBannerView.frame;
+    adBannerView.frame = CGRectMake(kDeviceWidth/2 - frame.size.width/2, 66, frame.size.width, frame.size.height);
+    
+    // Specify the ad unit ID.
+    adBannerView.adUnitID = MY_BANNER_UNIT_ID;
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    adBannerView.rootViewController = self;
+    [self.view addSubview:adBannerView];
+    
+    // Initiate a generic request to load it with an ad.
+    [adBannerView loadRequest:[GADRequest request]];
+}
+
+-(void)configNowPlayingInfoCenter
+{
     
     if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
         
@@ -169,6 +188,14 @@
     [super viewDidAppear:animated];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    self.drawer.DisEnableTouchMove = NO;
+    [_timer invalidate];
+    _avAudioPlayer = nil;
+}
+
 - (void)initTopMusicImage
 {
     CGSize screenSize = self.view.frame.size;
@@ -176,12 +203,12 @@
     UIImage *diskImage = [UIImage imageNamed:@"pan.png"];
     
     _musicImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, diskImage.size.width * .51, diskImage.size.height * .51)];
-    _musicImageView.center = CGPointMake(screenSize.width * 0.5, (screenSize.height - 138) / 2);
+    _musicImageView.center = CGPointMake(screenSize.width * 0.5, (screenSize.height - 88) / 2);
     [_musicImageView setImage:[UIImage imageNamed:@"Icon_big.png"]];
     [self.view addSubview:_musicImageView];
     
     UIImageView *diskBg =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, diskImage.size.width * 1.2, diskImage.size.height * 1.2)];
-    diskBg.center = CGPointMake(screenSize.width * 0.5, (screenSize.height - 147) / 2);
+    diskBg.center = CGPointMake(screenSize.width * 0.5, (screenSize.height - 97) / 2);
     [diskBg setImage:diskImage];
     [self.view addSubview:diskBg];
     
@@ -197,28 +224,30 @@
 {
     CGSize screenSize = self.view.frame.size;
     
+    int paddingBottom = 90;
+    
     // 初始化一个播放进度条
-    _progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(0, screenSize.height - 120, screenSize.width, 20)];
+    _progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(0, screenSize.height - paddingBottom, screenSize.width, 20)];
     [_progressV setProgressTintColor:[UIColor colorWithRed:249.0f/255.0f green:63.0f/255.0f blue:30.0f/255.0f alpha:1.0f]];
     [_progressV setProgressViewStyle:UIProgressViewStyleBar];
     [_progressV setBackgroundColor:[UIColor colorWithRed:114/255.0f green:114/255.0f blue:114/255.0f alpha:114/255.0f]];
     [self.view addSubview:_progressV];
     
-    _progressMaxTitle = [[UILabel alloc] initWithFrame:CGRectMake(screenSize.width - 110, screenSize.height - 120 - 20, 100, 20)];
+    _progressMaxTitle = [[UILabel alloc] initWithFrame:CGRectMake(screenSize.width - 110, screenSize.height - paddingBottom - 20, 100, 20)];
     _progressMaxTitle.textAlignment = NSTextAlignmentRight;
     _progressMaxTitle.text = @"00:00";
     _progressMaxTitle.font = [UIFont systemFontOfSize:14];
     _progressMaxTitle.textColor = [UIColor grayColor];
     [self.view addSubview:_progressMaxTitle];
     
-    _progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, screenSize.height - 120 - 20, 100, 20)];
+    _progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, screenSize.height - paddingBottom - 20, 100, 20)];
     _progressTitle.textAlignment = NSTextAlignmentLeft;
     _progressTitle.text = @"00:00";
     _progressTitle.font = [UIFont systemFontOfSize:14];
     _progressTitle.textColor = [UIColor grayColor];
     [self.view addSubview:_progressTitle];
     
-    _musicTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, screenSize.height - 120 - 50 - 30, screenSize.width, 30.0)];
+    _musicTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, screenSize.height - paddingBottom - 50 - 30, screenSize.width, 30.0)];
     _musicTitle.textAlignment = NSTextAlignmentCenter;
     _musicTitle.text = @"";
     _musicTitle.font = [UIFont boldSystemFontOfSize:24];
@@ -230,7 +259,7 @@
 {
     CGSize screenSize = self.view.frame.size;
     
-    int paddingBottom = 80;
+    int paddingBottom = 50;
     // 上一首
     UIImage *btnBackImage = [UIImage imageNamed:@"toolbar_prev_n_p"];
     UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnBackImage.size.width, btnBackImage.size.height)];

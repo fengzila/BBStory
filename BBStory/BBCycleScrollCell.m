@@ -7,8 +7,6 @@
 //
 
 #import "BBCycleScrollCell.h"
-#import "BBStoryInfoView.h"
-#import "BBTangshiInfoView.h"
 #import "BBDataManager.h"
 #import "MobClick.h"
 

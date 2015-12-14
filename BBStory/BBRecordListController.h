@@ -7,25 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ICSDrawerController.h"
 #import "BBStoryRecordTableView.h"
 #import "BBRecorderObject.h"
 
-@interface BBRecordListController : UIViewController<UINavigationControllerDelegate, ICSDrawerControllerChild, ICSDrawerControllerPresenting, BBStoryRecordTableViewDelegate>
+@interface BBRecordListController : UIViewController<BBStoryRecordTableViewDelegate>
 {
 @private
-    BBStoryRecordTableView *_storyView;
-    BBStoryRecordTableView *_tangshiView;
-    
-    UISegmentedControl *_segControl;
-    
-    BOOL _tabbarIsHidden;
-    
-    NSArray *_segTitleArr;
-    
-    int _statusBarHeight;
+    NSData* _data;
+    NSString* _title;
 }
 
-@property(nonatomic, weak) ICSDrawerController *drawer;
+- (id)initWithData:(NSData*)data Title:(NSString*)title;
 
 @end

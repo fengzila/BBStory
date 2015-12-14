@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BBStoryInfoView.h"
 
 @class BBMaterialView;
 @class BBStepView;

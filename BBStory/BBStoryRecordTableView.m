@@ -110,21 +110,53 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
     if (cell == nil)
     {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellWithIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//        
+//        cell.accessoryType = UITableViewCellAccessoryNone;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellWithIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        
+        cell.editingAccessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selected = NO;
+        
+        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(cell.frame.size.width-44, 0, 44, 60)];
+        imageP.image = [UIImage imageNamed:@"bt_04_J"];
+        [cell addSubview:imageP];
+        
+        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 250, 60)];
+        title.tag = 10001;
+        title.backgroundColor = [UIColor clearColor];
+        title.textAlignment = 0;
+        title.textColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:1.0];
+        title.font = [UIFont systemFontOfSize:16];
+        [cell addSubview:title];
+        
+        UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(cell.frame.size.width - 100, 0, 100, 60)];
+        timeLabel.tag = 10002;
+        timeLabel.backgroundColor = [UIColor clearColor];
+        timeLabel.textAlignment = 0;
+        timeLabel.textColor = [UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1.0];
+        timeLabel.font = [UIFont systemFontOfSize:14];
+        [cell addSubview:timeLabel];
+        
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 59, kDeviceWidth, 1)];
+        line.image = [UIImage imageNamed:@"gwc_line_"];
+        line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
+        [cell addSubview:line];
     }
     
     BBRecorderObject *data = [_data objectAtIndex:[_data count] - row - 1];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"No.%d  %@", (int)row+1, data.name];
-    cell.detailTextLabel.text = data.time;
-    
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+    ((UILabel*)[cell viewWithTag:10001]).text = [NSString stringWithFormat:@"No.%d  %@", (int)row+1, data.name];
+    ((UILabel*)[cell viewWithTag:10002]).text = data.time;
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

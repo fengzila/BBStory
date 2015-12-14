@@ -30,13 +30,13 @@ const char kTopTipLabelKey;
 
 - (void)setBackButtonWithImage
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0 || self.navigationController.viewControllers.count <= 1) {
-        self.navigationController.navigationItem.leftBarButtonItem = nil;
-        UMComBarButtonItem *backButtonItem = [[UMComBarButtonItem alloc] initWithNormalImageName:@"Backx" target:self action:@selector(goBack)];
-        backButtonItem.customView.frame = CGRectMake(0, 0, 40, 35);
-        backButtonItem.customButtonView.frame = CGRectMake(5, 0, 20, 20);
-        self.navigationItem.leftBarButtonItem = backButtonItem;
-    }
+//    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0 || self.navigationController.viewControllers.count <= 1) {
+//        self.navigationController.navigationItem.leftBarButtonItem = nil;
+//        UMComBarButtonItem *backButtonItem = [[UMComBarButtonItem alloc] initWithNormalImageName:@"Backx" target:self action:@selector(goBack)];
+//        backButtonItem.customView.frame = CGRectMake(0, 0, 40, 35);
+//        backButtonItem.customButtonView.frame = CGRectMake(5, 0, 20, 20);
+//        self.navigationItem.leftBarButtonItem = backButtonItem;
+//    }
 }
 
 - (void)setLeftButtonWithTitle:(NSString *)title action:(SEL)action

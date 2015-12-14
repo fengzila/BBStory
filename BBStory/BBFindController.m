@@ -7,6 +7,7 @@
 //
 
 #import "BBFindController.h"
+#import "BBAppDelegate.h"
 #import "BBRecorderObject.h"
 #import "PlayViewController.h"
 #import "BBDataManager.h"
@@ -49,8 +50,6 @@
     {
         _statusBarHeight = 20;
     }
-    self.navigationController.delegate = self;
-    [self.navigationController setNavigationBarHidden:YES animated:false];
     
     UIImage *btnMenu = [UIImage imageNamed:@"btn_menu"];
     NSParameterAssert(btnMenu);
@@ -70,6 +69,14 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.navigationController setNavigationBarHidden:YES animated:animated];
+    
 }
 
 - (void)pushInfoVCWithData:(BBRecorderObject*)data index:(int)index

@@ -29,6 +29,14 @@
             _contentFontSize = 100;
         }
         _isDarkMode = [ud boolForKey:@"isDarkMode"];
+        
+        _categoryDataList = [[NSMutableArray alloc] init];
+        [_categoryDataList addObject:@{@"img" : @"category_1", @"title" : @"小故事", @"recordKey" : UD_RECORDER_STORY_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_2", @"title" : @"唐诗三百首", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_2", @"title" : @"安徒生童话", @"recordKey" : UD_RECORDER_STORY_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"格林童话", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"三字经", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"弟子规", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
     }
     
     return self;
@@ -118,5 +126,10 @@
 -(ICSDrawerController*)getDrawer
 {
     return _drawer;
+}
+
+-(NSMutableArray*)getCategoryDataList
+{
+    return _categoryDataList;
 }
 @end
