@@ -72,7 +72,7 @@
         imageP.image = [UIImage imageNamed:@"bt_04_J"];
         [cell addSubview:imageP];
         
-        UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(90/2-60/2, 15, 60, 60)];
+        UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(90/2-80/2, 5, 80, 80)];
         headImg.tag = 10001;
         [cell addSubview:headImg];
         headImg.backgroundColor=[UIColor clearColor];
@@ -85,6 +85,14 @@
         title.font = [UIFont systemFontOfSize:15];
         [cell addSubview:title];
         
+        UILabel *desc = [[UILabel alloc]initWithFrame:CGRectMake(88, 55, 100, 20)];
+        desc.tag = 10003;
+        desc.backgroundColor = [UIColor clearColor];
+        desc.textAlignment = 0;
+        desc.textColor = [UIColor grayColor];
+        desc.font = [UIFont systemFontOfSize:13];
+        [cell addSubview:desc];
+        
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(10, 89, kDeviceWidth - 20, 1)];
         line.image = [UIImage imageNamed:@"gwc_line_"];
         line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
@@ -93,6 +101,8 @@
     
     ((UIImageView*)[cell viewWithTag:10001]).image = [UIImage imageNamed:[[_data objectAtIndex:row] objectForKey:@"img"]];
     ((UILabel*)[cell viewWithTag:10002]).text = [[_data objectAtIndex:row] objectForKey:@"title"];
+    NSString *numStr = [[_data objectAtIndex:row] objectForKey:@"num"];
+    ((UILabel*)[cell viewWithTag:10003]).text = [NSString stringWithFormat:@"数量：%d", [numStr intValue]];
     
     return cell;
 }

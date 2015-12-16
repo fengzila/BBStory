@@ -14,12 +14,13 @@
 
 @implementation BBDoRecordingView
 
-- (id)initWithFrame:(CGRect)frame Data:(NSDictionary*)data
+- (id)initWithFrame:(CGRect)frame Data:(NSDictionary*)data ConfigData:(NSDictionary*)configData;
 {
     self = [super initWithFrame:frame];
     if (self) {
         _isRecording = NO;
         _data = data;
+        _configData = configData;
         
         _bgView = [[UIView alloc] initWithFrame:self.bounds];
         _bgView.frame = CGRectMake(0, kDeviceHeight, kDeviceWidth, _bgView.height);
@@ -37,7 +38,7 @@
         UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [backBtn setFrame:CGRectMake(20, _tabbarView.height*.5 - 32*.5, 32, 32)];
         [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-        [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+        [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_record_close"] forState:UIControlStateNormal];
         [_tabbarView addSubview:backBtn];
         
         _recordingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -150,19 +151,22 @@
         
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
-        switch ([[BBDataManager getInstance] getCurContentDataType]) {
-            case kContentDataTypeStory:
-                _recorderName = [NSString stringWithFormat:@"%@/story_%@.caf", docDir, [_data objectForKey:@"id"]];
-                _saveKey = UD_RECORDER_STORY_LIST;
-                break;
-            case kContentDataTypeTangshi:
-                _recorderName = [NSString stringWithFormat:@"%@/tangshi_%@.caf", docDir, [_data objectForKey:@"id"]];
-                _saveKey = UD_RECORDER_TANGSHI_LIST;
-                break;
-                
-            default:
-                break;
-        }
+        _saveKey = [_configData objectForKey:@"recordKey"];
+        _recorderName = [NSString stringWithFormat:@"%@/%@_%@.caf", docDir, [_configData objectForKey:@"recordPrefix"], [_data objectForKey:@"id"]];
+        
+//        switch ([[BBDataManager getInstance] getCurContentDataType]) {
+//            case kContentDataTypeStory:
+//                _recorderName = [NSString stringWithFormat:@"%@/story_%@.caf", docDir, [_data objectForKey:@"id"]];
+//                _saveKey = UD_RECORDER_STORY_LIST;
+//                break;
+//            case kContentDataTypeTangshi:
+//                _recorderName = [NSString stringWithFormat:@"%@/tangshi_%@.caf", docDir, [_data objectForKey:@"id"]];
+//                _saveKey = UD_RECORDER_TANGSHI_LIST;
+//                break;
+//                
+//            default:
+//                break;
+//        }
         //录音设置
         _recorderSettingsDict =[[NSDictionary alloc] initWithObjectsAndKeys:
                                [NSNumber numberWithInt:kAudioFormatMPEG4AAC],AVFormatIDKey,

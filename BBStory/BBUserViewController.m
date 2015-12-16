@@ -27,7 +27,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:false];
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view = view;
-    view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
+    view.backgroundColor = kGray;
     
     BBUserScrollView *userVC = [[BBUserScrollView alloc] initWithFrame:CGRectMake(0, 44, kDeviceWidth, kDeviceHeight)];
     userVC.delegate = self;

@@ -52,8 +52,6 @@
     }
     _pageControl.numberOfPages = _totalPages;
     [self loadData];
-    
-    [self roll];
 }
 
 - (void)reloadDataWithoutAnimation
@@ -85,13 +83,6 @@
     for (int i = 0; i < _totalPages; i++)
     {
         UIView *v = [_curViews objectAtIndex:i];
-        if (i == 0) {
-            v.backgroundColor = [UIColor yellowColor];
-        } else if (i == 1) {
-            v.backgroundColor = [UIColor blueColor];
-        } else {
-            v.backgroundColor = [UIColor greenColor];
-        }
         v.userInteractionEnabled = YES;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
@@ -131,8 +122,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
 {
-    return;
-//    [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:YES];
+    _pageControl.currentPage = (int)(_scrollView.contentOffset.x / _scrollView.frame.size.width);
     
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UMComViewController.h"
 
-#define DeltaBottom  45
+#define DeltaBottom  105
 #define DeltaRight 45
 
 @class UMComComment, UMComFeedTableView,UMComPullRequest;

@@ -32,4 +32,14 @@
 {
     return [[self parserData:@"tangshi"] objectForKey:key];
 }
+
++ (id)andersenList:(NSString*) key
+{
+    return [[self parserData:@"andersen"] objectForKey:key];
+}
+
++ (id)grimmList:(NSString*) key
+{
+    return [[self parserData:@"grimm"] objectForKey:key];
+}
 @end

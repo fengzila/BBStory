@@ -53,6 +53,8 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
         statusBarHeight = 20;
     }
     
+    self.navigationItem.title = @"爸比的游戏";
+    
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, statusBarHeight + 10, kDeviceWidth, 25)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;

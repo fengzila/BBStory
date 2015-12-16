@@ -83,7 +83,7 @@
         imageP.image = [UIImage imageNamed:@"bt_04_J"];
         [cell addSubview:imageP];
         
-        UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(90/2-60/2, 15, 60, 60)];
+        UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(90/2-80/2, 5, 80, 80)];
         headImg.tag = 10001;
         [cell addSubview:headImg];
         headImg.backgroundColor=[UIColor clearColor];
@@ -96,15 +96,27 @@
         title.font = [UIFont systemFontOfSize:14];
         [cell addSubview:title];
         
+        UILabel *desc = [[UILabel alloc]initWithFrame:CGRectMake(88, 55, 100, 20)];
+        desc.tag = 10003;
+        desc.backgroundColor = [UIColor clearColor];
+        desc.textAlignment = 0;
+        desc.textColor = [UIColor grayColor];
+        desc.font = [UIFont systemFontOfSize:13];
+        [cell addSubview:desc];
+        
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 89, 320, 1)];
         line.image = [UIImage imageNamed:@"gwc_line_"];
         line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
         [cell addSubview:line];
     }
     
-    NSMutableArray *data = [[BBDataManager getInstance] getCategoryDataList];
-    ((UIImageView*)[cell viewWithTag:10001]).image = [UIImage imageNamed:[[data objectAtIndex:row] objectForKey:@"img"]];
-    ((UILabel*)[cell viewWithTag:10002]).text = [[data objectAtIndex:row] objectForKey:@"title"];
+    NSMutableArray *categoryData = [[BBDataManager getInstance] getCategoryDataList];
+    ((UIImageView*)[cell viewWithTag:10001]).image = [UIImage imageNamed:[[categoryData objectAtIndex:row] objectForKey:@"img"]];
+    ((UILabel*)[cell viewWithTag:10002]).text = [[categoryData objectAtIndex:row] objectForKey:@"title"];
+    
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[[categoryData objectAtIndex:row] objectForKey:@"recordKey"]];
+//    NSString *numStr = [[_data objectAtIndex:row] objectForKey:@"num"];
+    ((UILabel*)[cell viewWithTag:10003]).text = [NSString stringWithFormat:@"数量：%lu", [[NSKeyedUnarchiver unarchiveObjectWithData:data] count]];
     
     return cell;
 }

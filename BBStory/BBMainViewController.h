@@ -15,6 +15,7 @@
 @interface BBMainViewController : UIViewController<BBStoryTableViewDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate, ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 {
 @private
+    NSDictionary *_configData;
     BBStoryTableView *_allView;
     BBStoryTableView *_loveView;
     
@@ -38,5 +39,7 @@
 }
 
 @property(nonatomic, weak) ICSDrawerController *drawer;
+
+- (id)initWithData:(NSDictionary*)data;
 
 @end

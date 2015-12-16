@@ -36,7 +36,7 @@
 #define kTagRecommend 100
 #define kTagAll 101
 
-#define DeltaBottom  45
+#define DeltaBottom  105
 #define DeltaRight 45
 
 @interface UMComHomeFeedViewController ()<UISearchBarDelegate, UMComScrollViewDelegate, UMComClickActionDelegate>

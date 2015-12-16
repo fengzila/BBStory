@@ -13,6 +13,7 @@
 #import "PinYinForObjc.h"
 #import "BBCycleViewController.h"
 #import "BBDataManager.h"
+#import "BBAppDelegate.h"
 
 @interface BBMainViewController ()
 
@@ -26,7 +27,21 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+        UIImage* image = [UIImage imageNamed:@"btn_back_n"];
+        [backItem setBackButtonBackgroundImage:[image resizableImageWithCapInsets:UIEdgeInsetsMake(0, image.size.width, 0, 0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [backItem setBackButtonTitlePositionAdjustment:UIOffsetMake(-400.f, 0) forBarMetrics:UIBarMetricsDefault];
+        self.navigationItem.backBarButtonItem = backItem;
+        
+    }
+    return self;
+}
+
+- (id)initWithData:(NSDictionary*)data
+{
+    self = [super init];
+    if (self) {
+        _configData = data;
     }
     return self;
 }
@@ -35,7 +50,7 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view = view;
-    view.backgroundColor = kGray;
+    view.backgroundColor = [UIColor whiteColor];
     
     _statusBarHeight = 0;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
@@ -43,16 +58,7 @@
         _statusBarHeight = 20;
     }
     self.navigationController.delegate = self;
-    [self.navigationController setNavigationBarHidden:YES animated:false];
-    
-    UIImage *btnMenu = [UIImage imageNamed:@"btn_menu"];
-    NSParameterAssert(btnMenu);
-    
-    self.openDrawerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.openDrawerButton.frame = CGRectMake(0.0f, _statusBarHeight + 0.0f, 44.0f, 44.0f);
-    [self.openDrawerButton setImage:btnMenu forState:UIControlStateNormal];
-    [self.openDrawerButton addTarget:self action:@selector(openDrawer:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.openDrawerButton];
+//    [self.navigationController setNavigationBarHidden:YES animated:false];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSInteger hasSawNewGames = [ud integerForKey:UD_HAS_SAWNEWGAMES];
@@ -80,9 +86,10 @@
     [_segControl setTitleTextAttributes:selectedDic forState:UIControlStateSelected];
     _segControl.tintColor = [UIColor colorWithRed:243/255.0 green:76/255.0 blue:51/255.0 alpha:1];
     _segControl.selectedSegmentIndex = 0;
-    [self.view addSubview:_segControl];
+//    [self.view addSubview:_segControl];
+    self.navigationItem.titleView = _segControl;
     
-    mySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40)];
+    mySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40)];
     mySearchBar.delegate = self;
     [mySearchBar setPlaceholder:@"搜索"];
     [self.view addSubview:mySearchBar];
@@ -92,21 +99,21 @@
     searchDisplayController.searchResultsDataSource = self;
     searchDisplayController.searchResultsDelegate = self;
     
-    _allData = [[BBDataManager getInstance] getDataList];
+    _allData = [[BBDataManager getInstance] getDataListWithKey:[_configData objectForKey:@"dataKey"]];
     
     [self initLoveListData];
 
     
-    _allView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_allData];
+    _allView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 86 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_allData];
     _allView.delegate = self;
     [self.view addSubview:_allView];
     
-    _loveView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 75 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_loveData];
+    _loveView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 86 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_loveData];
     _loveView.delegate = self;
     [self.view addSubview:_loveView];
     [_loveView setHidden:YES];
     
-    int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [[BBDataManager getInstance] getKeyPrefix]]];
+    int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [_configData objectForKey:@"keyPrefix"]]];
     [_allView scrollToRowAtIndexPath:lastReadPage];
     
     [self loadAdBanner];
@@ -153,7 +160,7 @@
 - (void) initLoveListData
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
+    NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [_configData objectForKey:@"keyPrefix"]]];
     _loveData = [[NSMutableArray alloc] init];
     
     NSArray *keys = [loveDic allKeys];
@@ -175,10 +182,10 @@
     if (viewController == self)
     {
 //        // 只有主场景不显示导航条
-//        [navigationController setNavigationBarHidden:YES animated:animated];
+//        [self.navigationController setNavigationBarHidden:NO animated:animated];
         
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
+        NSDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [_configData objectForKey:@"keyPrefix"]]];
         
         int count = (int)[[loveDic allKeys] count];
         
@@ -187,12 +194,12 @@
             [_loveView reloadData:_loveData];
         }
         
-        int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [[BBDataManager getInstance] getKeyPrefix]]];
+        int lastReadPage = (int)[ud integerForKey:[NSString stringWithFormat:@"%@lastReadPage", [_configData objectForKey:@"keyPrefix"]]];
         [_allView scrollToRowAtIndexPath:lastReadPage];
     }
-    else if ([navigationController isNavigationBarHidden])
+    else
     {
-//        [navigationController setNavigationBarHidden:NO animated:animated];
+//        [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
 }
 
@@ -222,8 +229,7 @@
 {
 //    BBStoryInfoViewController *infoVC = [[BBStoryInfoViewController alloc] initWithData:data];
     
-    BBCycleViewController *infoVC = [[BBCycleViewController alloc] initWithData:data index:index];
-    infoVC.drawer = self.drawer;
+    BBCycleViewController *infoVC = [[BBCycleViewController alloc] initWithData:data index:index ConfigData:_configData];
     
     [self.navigationController pushViewController:infoVC animated:YES];
 }
@@ -305,7 +311,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-//    mySearchBar.frame = CGRectMake(0, _statusBarHeight, kDeviceWidth, 40);
+    mySearchBar.frame = CGRectMake(0, _statusBarHeight, kDeviceWidth, 40);
     
     searchBar.showsCancelButton = YES;
     for(id cc in [searchBar subviews])
@@ -320,12 +326,12 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-//    mySearchBar.frame = CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40);
+    mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-//    mySearchBar.frame = CGRectMake(0, 35 + _statusBarHeight, kDeviceWidth, 40);
+    mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
 }
 
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
@@ -338,35 +344,12 @@
     
 }
 
-#pragma mark - Configuring the view’s layout behavior
-
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
-
-#pragma mark - ICSDrawerControllerPresenting
-
-- (void)drawerControllerWillOpen:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = NO;
-}
-
-- (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = YES;
-}
-
 #pragma mark - Open drawer button
 
 - (void)openDrawer:(id)sender
 {
-    [self.drawer open];
+    BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad

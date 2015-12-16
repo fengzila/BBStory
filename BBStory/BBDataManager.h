@@ -30,6 +30,7 @@ typedef enum {
 -(void)setCurContentDataType:(ContentDataType)DataType;
 -(ContentDataType)getCurContentDataType;
 -(id)getDataList;
+-(id)getDataListWithKey:(NSString*)key;
 -(NSString*)getKeyPrefix;
 -(void)changeColor;
 -(int)getColorIndex;

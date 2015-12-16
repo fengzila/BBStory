@@ -23,17 +23,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.navigationItem.title = @"爸比讲故事";
     }
     return self;
 }
 
-- (id)initWithData:(NSArray*)data index:(int)index
+- (id)initWithData:(NSArray*)data index:(int)index ConfigData:(NSDictionary *)configData
 {
     self = [super init];
     if (self) {
         _data = data;
         _index = index;
+        _configData = configData;
         _tabbarIsHidden = NO;
     }
     return self;
@@ -61,11 +62,11 @@
     _tabbarLine.image = [UIImage imageNamed:@"btn_bg"];
     [_tabbarView addSubview:_tabbarLine];
     
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(20, _tabbarView.height*.5 - 32*.5, 32, 32)];
-    [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-    [_tabbarView addSubview:backBtn];
+//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBtn setFrame:CGRectMake(20, _tabbarView.height*.5 - 32*.5, 32, 32)];
+//    [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+//    [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+//    [_tabbarView addSubview:backBtn];
     
     _recordingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_recordingBtn setFrame:CGRectMake(kDeviceWidth - 120 - 24, _tabbarView.height*.5 - 24*.5 - 2, 24, 24)];
@@ -84,7 +85,7 @@
     [_moreBtn setBackgroundImage:[UIImage imageNamed:@"btn_more"] forState:UIControlStateNormal];
     [_tabbarView addSubview:_moreBtn];
     
-    _pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 100, _tabbarView.height)];
+    _pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, _tabbarView.height)];
     _pageLabel.font = [UIFont boldSystemFontOfSize:16];
     _pageLabel.textColor = [UIColor colorWithRed:113.0f/255.0f green:113.0f/255.0f blue:113.0f/255.0f alpha:1.0f];
     _pageLabel.backgroundColor = [UIColor clearColor];
@@ -113,7 +114,7 @@
     
 //    [self loadAdBanner];
     
-    [[BBBannerManager getInstance] requestWithViewController:self];
+//    [[BBBannerManager getInstance] requestWithViewController:self];
     
     [self setDarkMode:[[BBDataManager getInstance] isDarkMode]];
 
@@ -128,7 +129,7 @@
 - (void)recordingAction
 {
     NSDictionary *curData = [_data objectAtIndex:_csView.curPage];
-    BBDoRecordingView* doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) Data:curData];
+    BBDoRecordingView* doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) Data:curData ConfigData:_configData];
     [self.view addSubview:doRecordingView];
     [doRecordingView showWithAnimation];
     [MobClick event:@"touchRecorderShowBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [curData objectForKey:@"id"]], @"name" : [curData objectForKey:@"title"]}];
@@ -154,7 +155,7 @@
         NSDictionary *curData = [_data objectAtIndex:_csView.curPage];
         
         NSMutableDictionary *dynamicLoveDic = [[NSMutableDictionary alloc] init];
-        NSMutableDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
+        NSMutableDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [_configData objectForKey:@"keyPrefix"]]];
         if (loveDic != Nil) {
             NSArray *keys;
             int i;
@@ -182,7 +183,7 @@
             [dynamicLoveDic removeObjectForKey:k];
         }
         
-        [ud setValue:dynamicLoveDic forKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
+        [ud setValue:dynamicLoveDic forKey:[NSString stringWithFormat:@"%@loveDic", [_configData objectForKey:@"keyPrefix"]]];
         [ud synchronize];
     }
     @catch(NSException *exception) {
@@ -237,7 +238,7 @@
     NSString *key = [NSString stringWithFormat:@"%@", [curData objectForKey:@"id"]];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [[BBDataManager getInstance] getKeyPrefix]]];
+    NSMutableDictionary *loveDic = [ud objectForKey:[NSString stringWithFormat:@"%@loveDic", [_configData objectForKey:@"keyPrefix"]]];
     if (loveDic == Nil) {
         loveDic = [[NSMutableDictionary alloc] init];
     }
@@ -251,7 +252,7 @@
 
     _pageLabel.text = [NSString stringWithFormat:@"%d/%d", (int)(_csView.curPage+1), (int)[_data count]];
     
-    [ud setInteger:_csView.curPage forKey:[NSString stringWithFormat:@"%@lastReadPage", [[BBDataManager getInstance] getKeyPrefix]]];
+    [ud setInteger:_csView.curPage forKey:[NSString stringWithFormat:@"%@lastReadPage", [_configData objectForKey:@"keyPrefix"]]];
 }
 
 - (NSInteger)numberOfPages
@@ -348,11 +349,6 @@
     // Even if this view controller hides the status bar, implementing this method is still needed to match the center view controller's
     // status bar style to avoid a flicker when the drawer is dragged and then left to open.
     return UIStatusBarStyleDefault;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 #pragma mark - DCPathButton delegate

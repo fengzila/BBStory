@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMobileAds/GADBannerView.h>
+#import "BBCategoryTableView.h"
 #import "BBHomeBannerScrollView.h"
 
-@interface BBHomeViewController : UIViewController<UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, BBHomeBannerScrollViewDatasource, BBHomeBannerScrollViewDelegate>
+@interface BBHomeViewController : UIViewController<UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, BBHomeBannerScrollViewDatasource, BBHomeBannerScrollViewDelegate, BBCategoryTableViewDelegate>
 {
 @private
     float _height;

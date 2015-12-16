@@ -31,12 +31,10 @@
         _isDarkMode = [ud boolForKey:@"isDarkMode"];
         
         _categoryDataList = [[NSMutableArray alloc] init];
-        [_categoryDataList addObject:@{@"img" : @"category_1", @"title" : @"小故事", @"recordKey" : UD_RECORDER_STORY_LIST}];
-        [_categoryDataList addObject:@{@"img" : @"category_2", @"title" : @"唐诗三百首", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
-        [_categoryDataList addObject:@{@"img" : @"category_2", @"title" : @"安徒生童话", @"recordKey" : UD_RECORDER_STORY_LIST}];
-        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"格林童话", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
-        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"三字经", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
-        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"弟子规", @"recordKey" : UD_RECORDER_TANGSHI_LIST}];
+        [_categoryDataList addObject:@{@"img" : @"category_1", @"title" : @"小故事", @"num" : @"280", @"recordKey" : @"recorderStoryList", @"recordPrefix" : @"story", @"dataKey" : @"storyList", @"keyPrefix" : @""}];
+        [_categoryDataList addObject:@{@"img" : @"category_2", @"title" : @"唐诗三百首", @"num" : @"313", @"recordKey" : @"recorderTangshiList", @"recordPrefix" : @"tangshi", @"dataKey" : @"tangshilist", @"keyPrefix" : @"tangshi"}];
+        [_categoryDataList addObject:@{@"img" : @"category_3", @"title" : @"安徒生童话", @"num" : @"133", @"recordKey" : @"recorderAndersenList", @"recordPrefix" : @"andersen", @"dataKey" : @"andersenList", @"keyPrefix" : @"andersen"}];
+        [_categoryDataList addObject:@{@"img" : @"category_4", @"title" : @"格林童话", @"num" : @"193", @"recordKey" : @"recorderGrimmList", @"recordPrefix" : @"grimm", @"dataKey" : @"grimmList", @"keyPrefix" : @"grimm"}];
     }
     
     return self;
@@ -60,6 +58,30 @@
             break;
         case kContentDataTypeTangshi:
             return [BBNetworkService tangshiList:@"tangshilist"];
+            break;
+            
+        default:
+            break;
+    }
+    return nil;
+}
+
+-(id)getDataListWithKey:(NSString*)key
+{
+    NSArray *items = @[@"storyList", @"tangshilist", @"andersenList", @"grimmList", @"tangshilist"];
+    int item = (int)[items indexOfObject:key];
+    switch (item) {
+        case 0:
+            return [BBNetworkService storyList:@"storyList"];
+            break;
+        case 1:
+            return [BBNetworkService tangshiList:@"tangshilist"];
+            break;
+        case 2:
+            return [BBNetworkService andersenList:@"andersenList"];
+            break;
+        case 3:
+            return [BBNetworkService grimmList:@"grimmList"];
             break;
             
         default:

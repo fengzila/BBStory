@@ -52,11 +52,5 @@
 - (void)loadData;
 - (void)reloadData;
 - (void)reloadDataWithoutAnimation;
-- (void)setViewContent:(UIView *)view atIndex:(NSInteger)index;
-- (void)roll;
-- (void)stopRoll;
-- (void)goTop;
-- (void)setContentFontSize:(int)fontSize;
-
 @end
 

@@ -12,5 +12,7 @@
 
 + (id)storyList:(NSString*) key;
 + (id)tangshiList:(NSString*) key;
++ (id)andersenList:(NSString*) key;
++ (id)grimmList:(NSString*) key;
 
 @end

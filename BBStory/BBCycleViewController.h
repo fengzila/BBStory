@@ -18,6 +18,7 @@
 {
 @private
     NSArray* _data;
+    NSDictionary *_configData;
     int _lastPosition;
     BOOL _tabbarIsHidden;
     int _index;
@@ -38,5 +39,5 @@
     BBDoRecordingView *_doRecordingView;
 }
 @property(nonatomic, weak) ICSDrawerController *drawer;
-- (id)initWithData:(NSArray*)data index:(int)index;
+- (id)initWithData:(NSArray*)data index:(int)index ConfigData:(NSDictionary*)configData;
 @end

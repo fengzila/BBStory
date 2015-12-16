@@ -7,6 +7,7 @@
 {
 @private
     NSDictionary* _data;
+    NSDictionary* _configData;
     UIView *_bgView;
     UIView *_tabbarView;
     UIView *_topbarView;
@@ -34,6 +35,6 @@
 
 @property(nonatomic, weak) ICSDrawerController *drawer;
 
-- (id)initWithFrame:(CGRect)frame Data:(NSDictionary*)data;
+- (id)initWithFrame:(CGRect)frame Data:(NSDictionary*)data ConfigData:(NSDictionary*)configData;
 -(void)showWithAnimation;
 @end

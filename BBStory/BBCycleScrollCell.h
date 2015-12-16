@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GADBannerView.h>
 
 @class BBMaterialView;
 @class BBStepView;
@@ -28,6 +29,8 @@
     UIWebView *_contentWebView;
     UIView *_bgView;
     NSDictionary *_data;
+    GADBannerView *_adSquareBannerView;
+    UIView *_bannerView;
 }
 
 @property (nonatomic) id <BBCycleScrollCellDelegate> delegate;
