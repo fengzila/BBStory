@@ -68,7 +68,7 @@
         cell.selected = NO;
         cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         
-        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(cell.frame.size.width-44, (90-70)/2, 44, 70)];
+        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(kDeviceWidth-44, (90-70)/2, 44, 70)];
         imageP.image = [UIImage imageNamed:@"bt_04_J"];
         [cell addSubview:imageP];
         

@@ -120,7 +120,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selected = NO;
         
-        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(cell.frame.size.width-44, 0, 44, 60)];
+        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(kDeviceWidth-44, 0, 44, 60)];
         imageP.image = [UIImage imageNamed:@"bt_04_J"];
         [cell addSubview:imageP];
         

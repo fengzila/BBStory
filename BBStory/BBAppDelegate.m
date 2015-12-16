@@ -100,12 +100,24 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    NSLog(@"----devicetoken------%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                       stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                      stringByReplacingOccurrencesOfString: @" " withString: @""]);
+    
     [UMessage registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [UMessage didReceiveRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    
+    NSString *error_str = [NSString stringWithFormat: @"%@", err];
+    NSLog(@"Failed to get token, error:%@", error_str);
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
