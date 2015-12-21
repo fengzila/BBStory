@@ -30,6 +30,7 @@
 #import "UMComFeedDetailViewController.h"
 #import "UMComWebViewController.h"
 #import "UMComSession.h"
+#import "BBAppDelegate.h"
 
 @interface UMComFeedTableViewController ()<NSFetchedResultsControllerDelegate,UITextFieldDelegate,UMComClickActionDelegate> {
     
@@ -182,6 +183,8 @@
         return;
     }
     UMComFeedDetailViewController * feedDetailViewController = [[UMComFeedDetailViewController alloc] initWithFeed:feed showFeedDetailShowType:UMComShowFromClickFeedText];
+//    BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
+//    [appDelegate.navigationController pushViewController:feedDetailViewController animated:YES];
     [self.navigationController pushViewController:feedDetailViewController animated:YES];
 }
 
@@ -191,6 +194,9 @@
         return;
     }
     UMComFeedDetailViewController * feedDetailViewController = [[UMComFeedDetailViewController alloc] initWithFeed:feed showFeedDetailShowType:UMComShowFromClickFeedText];
+    
+//    BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
+//    [appDelegate.navigationController pushViewController:feedDetailViewController animated:YES];
     [self.navigationController pushViewController:feedDetailViewController animated:YES];
 }
 

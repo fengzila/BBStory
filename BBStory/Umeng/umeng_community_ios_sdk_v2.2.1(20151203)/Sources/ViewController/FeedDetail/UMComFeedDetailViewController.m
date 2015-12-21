@@ -145,7 +145,7 @@ static const CGFloat kLikeViewHeight = 30;
     }
     CGFloat heigth = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
     
-    self.menuView.frame = CGRectMake(0, self.view.window.frame.size.height - self.menuView.frame.size.height-heigth, self.view.frame.size.width, self.menuView.frame.size.height);
+    self.menuView.frame = CGRectMake(0, self.view.window.frame.size.height - self.menuView.frame.size.height-heigth-55, self.view.frame.size.width, self.menuView.frame.size.height);
     isViewDidAppear = YES;
 }
 

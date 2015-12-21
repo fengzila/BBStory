@@ -19,6 +19,10 @@
 #import "BBDataManager.h"
 #import "UMCommunity.h"
 
+#import "UMSocial.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+
 @implementation BBAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -31,6 +35,11 @@
     [MobClick startWithAppkey:@"5322c5df56240b031a0d715c"];
     [UMOnlineConfig updateOnlineConfigWithAppkey:@"5322c5df56240b031a0d715c"];
     [UMCommunity setWithAppKey:@"5322c5df56240b031a0d715c"];
+    
+    [UMSocialQQHandler setQQWithAppId:@"1105023824" appKey:@"9HWkSwnBi85WQ4Ht" url:@"http://www.umeng.com/social"];
+    
+    //设置微信AppId、appSecret，分享url
+//    [UMSocialWechatHandler setWXAppId:@"wx0d36e5e5f6ae75f6" appSecret:@"a24a007d83f115b5639254438bac879d" url:@"http://www.umeng.com/social"];
     
     [UMessage startWithAppkey:@"5322c5df56240b031a0d715c" launchOptions:launchOptions];
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
@@ -120,6 +129,14 @@
     
 }
 
+/**
+ 这里处理新浪微博SSO授权之后跳转回来，和微信分享完成之后跳转回来
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -137,9 +154,12 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+/**
+ 这里处理新浪微博SSO授权进入新浪微博客户端后进入后台，再返回原来应用
+ */
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UMSocialSnsService  applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

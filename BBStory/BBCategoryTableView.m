@@ -26,7 +26,11 @@
         _tableView.delegate = self;
         [self addSubview:_tableView];
         
-        _tableView.frame = CGRectMake(0, 0, self.frame.size.width, [data count]*90);
+        float h = [data count]*90;
+        if (h < kDeviceHeight - kDeviceWidth*.45f) {
+            h = kDeviceHeight - kDeviceWidth*.45f;
+        }
+        _tableView.frame = CGRectMake(0, 0, self.frame.size.width, h);
         
         _data = data;
     }

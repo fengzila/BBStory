@@ -29,9 +29,13 @@
         [self addSubview:_baseView];
         _baseView.delegate = self;
         
-        _baseView.contentSize = CGSizeMake(self.bounds.size.width, 600);
+        float h = 300;
+        if (h < kDeviceHeight - kDeviceWidth*.6f) {
+            h = kDeviceHeight - kDeviceWidth*.6f;
+        }
+        _tableView.frame = CGRectMake(0, 0, self.frame.size.width, h);
         
-        _tableView= [[UITableView alloc] initWithFrame:CGRectMake(0, _imageView.height - 30, self.frame.size.width, 300) style:UITableViewStyleGrouped];
+        _tableView= [[UITableView alloc] initWithFrame:CGRectMake(0, _imageView.height - 30, self.frame.size.width, h) style:UITableViewStyleGrouped];
         _tableView.backgroundView = nil;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -40,6 +44,8 @@
         _tableView.layer.masksToBounds = YES;
         _tableView.layer.cornerRadius = 8.0;
         [_baseView addSubview:_tableView];
+        
+        _baseView.contentSize = CGSizeMake(self.bounds.size.width, self.width*.6f+h + 100);
     }
     return self;
 }

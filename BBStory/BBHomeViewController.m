@@ -189,7 +189,7 @@
         [view addSubview:bgView];
         
         if (kDeviceWidth > 640) {
-            _adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeLeaderboard];
+            _adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeMediumRectangle];
         } else {
             _adBannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeLargeBanner];
         }
