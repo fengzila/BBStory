@@ -30,12 +30,20 @@
     [self.navigationController setNavigationBarHidden:YES animated:false];
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view = view;
-    view.backgroundColor = kGray;
+    view.backgroundColor = [UIColor whiteColor];
     
     _baseView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, kDeviceHeight - 44)];
     _baseView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_baseView];
     _baseView.delegate = self;
+    
+    UILabel *refreshTip = [[UILabel alloc]initWithFrame:CGRectMake(0, -50, kDeviceWidth, 20)];
+    refreshTip.text = @"别拉了，什么都没有^_^";
+    refreshTip.backgroundColor = [UIColor clearColor];
+    [refreshTip setTextAlignment:NSTextAlignmentCenter];
+    refreshTip.textColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
+    refreshTip.font = [UIFont systemFontOfSize:15];
+    [_baseView addSubview:refreshTip];
     
     _csView = [[BBHomeBannerScrollView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth*.45f)];
     _csView.delegate = self;

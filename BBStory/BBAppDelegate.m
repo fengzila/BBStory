@@ -39,7 +39,7 @@
     [UMSocialQQHandler setQQWithAppId:@"1105023824" appKey:@"9HWkSwnBi85WQ4Ht" url:@"http://www.umeng.com/social"];
     
     //设置微信AppId、appSecret，分享url
-//    [UMSocialWechatHandler setWXAppId:@"wx0d36e5e5f6ae75f6" appSecret:@"a24a007d83f115b5639254438bac879d" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wx0d36e5e5f6ae75f6" appSecret:@"a24a007d83f115b5639254438bac879d" url:@"http://www.umeng.com/social"];
     
     [UMessage startWithAppkey:@"5322c5df56240b031a0d715c" launchOptions:launchOptions];
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_

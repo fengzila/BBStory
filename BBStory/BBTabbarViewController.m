@@ -106,7 +106,7 @@ BBTabbarViewController *instance = Nil;
 - (void)customTabbarView
 {
     // 自定义tabbar背景视图
-    _tabbarBg = [[UIView alloc] initWithFrame:CGRectMake(0, kDeviceHeight - 59, kDeviceWidth, 59)];;
+    _tabbarBg = [[UIView alloc] initWithFrame:CGRectMake(0, kDeviceHeight - 54, kDeviceWidth, 54)];;
     _tabbarBg.userInteractionEnabled = YES;
     _tabbarBg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tabbarBg];
@@ -122,7 +122,7 @@ BBTabbarViewController *instance = Nil;
         int x = [_pos[i] intValue];
         
         BOOL withText = YES;
-        BBItemView *itemView = [[BBItemView alloc] initWithFrame:CGRectMake(x - 44 / 2, _tabbarBg.height/2.0 - 44.0/2, 44, 44) WithText:withText];
+        BBItemView *itemView = [[BBItemView alloc] initWithFrame:CGRectMake(x - 46 / 2, _tabbarBg.height/2.0 - 46.0/2, 46, 46) WithText:withText];
         itemView.tag = i;
         itemView.delegate = self;
         itemView.item.image = [UIImage imageNamed:_imgs[i]];
@@ -166,7 +166,7 @@ BBTabbarViewController *instance = Nil;
 {
     [UIView animateWithDuration:durationTime
                      animations:^{
-                         _tabbarBg.frame = CGRectMake(0, kDeviceHeight - 59, kDeviceWidth, 59);
+                         _tabbarBg.frame = CGRectMake(0, kDeviceHeight - 54, kDeviceWidth, 54);
                      }];
     
 }
@@ -176,7 +176,7 @@ BBTabbarViewController *instance = Nil;
 {
     [UIView animateWithDuration:durationTime
                      animations:^{
-                         _tabbarBg.frame = CGRectMake(0, kDeviceHeight, kDeviceWidth, 59);
+                         _tabbarBg.frame = CGRectMake(0, kDeviceHeight, kDeviceWidth, 54);
                      }];
 }
 

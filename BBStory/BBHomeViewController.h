@@ -11,7 +11,7 @@
 #import "BBCategoryTableView.h"
 #import "BBHomeBannerScrollView.h"
 
-@interface BBHomeViewController : UIViewController<UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, BBHomeBannerScrollViewDatasource, BBHomeBannerScrollViewDelegate, BBCategoryTableViewDelegate>
+@interface BBHomeViewController : UIViewController<UINavigationControllerDelegate, UIScrollViewDelegate, BBHomeBannerScrollViewDatasource, BBHomeBannerScrollViewDelegate, BBCategoryTableViewDelegate>
 {
 @private
     float _height;

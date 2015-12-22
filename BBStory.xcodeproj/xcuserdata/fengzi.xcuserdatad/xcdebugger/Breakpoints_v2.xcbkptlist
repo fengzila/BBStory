@@ -57,54 +57,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Feed/UMComFeedTableViewController.m"
-            timestampString = "472378564.425772"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-customObj:clickOnUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Feed/UMComFeedTableViewController.m"
-            timestampString = "472378564.425772"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "-customObj:clickOnTopic:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Feed/UMComFeedTableViewController.m"
-            timestampString = "472378746.406208"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "-customObj:clickOnURL:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Find/UMComFindViewController.m"
             timestampString = "472378462.72084"
             startingColumnNumber = "9223372036854775807"
@@ -128,54 +80,6 @@
             startingLineNumber = "290"
             endingLineNumber = "290"
             landmarkName = "-tranToNearby"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Find/UMComFindViewController.m"
-            timestampString = "472378468.985173"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
-            landmarkName = "-tranToUserCenter"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Find/UMComFindViewController.m"
-            timestampString = "472378471.025085"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
-            landmarkName = "-tranToSetting"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Find/UMComFindViewController.m"
-            timestampString = "472378473.369506"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
-            landmarkName = "-noticeVc"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -288,38 +192,6 @@
             startingLineNumber = "270"
             endingLineNumber = "270"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Feed/UMComFeedTableViewController.m"
-            timestampString = "472378746.406208"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "-customObj:clickOnOriginFeedText:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/Sources/ViewController/Feed/UMComFeedTableViewController.m"
-            timestampString = "472378746.406208"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "-customObj:clickOnFeedText:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

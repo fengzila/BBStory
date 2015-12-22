@@ -25,7 +25,7 @@
 
 - (void)initSubViews
 {
-    _item = [[UIImageView alloc] initWithFrame:CGRectMake(self.width/2.0 - 29 / 2, 3, 29, 29)];
+    _item = [[UIImageView alloc] initWithFrame:CGRectMake(self.width/2.0 - 27 / 2, 3, 27, 27)];
     _item.contentMode = UIViewContentModeScaleAspectFill;
     _item.userInteractionEnabled = YES;
     [self addSubview:_item];

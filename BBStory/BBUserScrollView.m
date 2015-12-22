@@ -38,11 +38,11 @@
         _tableView= [[UITableView alloc] initWithFrame:CGRectMake(0, _imageView.height - 30, self.frame.size.width, h) style:UITableViewStyleGrouped];
         _tableView.backgroundView = nil;
         _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        _tableView.showsHorizontalScrollIndicator=NO;
+        _tableView.showsVerticalScrollIndicator=NO;
+        _tableView.separatorColor=[UIColor clearColor];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.layer.masksToBounds = YES;
-        _tableView.layer.cornerRadius = 8.0;
         [_baseView addSubview:_tableView];
         
         _baseView.contentSize = CGSizeMake(self.bounds.size.width, self.width*.6f+h + 100);
@@ -55,12 +55,12 @@
     _data = [[NSMutableArray alloc] init];
     
     NSMutableArray *seg1 = [[NSMutableArray alloc] init];
-    [seg1 addObject:@{@"img" : @"logo", @"title" : @"我的录音"}];
+    [seg1 addObject:@{@"img" : @"menu_recorder", @"title" : @"我的录音"}];
     [_data addObject:seg1];
     
     NSMutableArray *seg2 = [[NSMutableArray alloc] init];
-    [seg2 addObject:@{@"img" : @"logo", @"title" : @"爸比的游戏"}];
-    [seg2 addObject:@{@"img" : @"logo", @"title" : @"五星好评"}];
+    [seg2 addObject:@{@"img" : @"menu_game", @"title" : @"爸比的游戏"}];
+    [seg2 addObject:@{@"img" : @"menu_rate", @"title" : @"五星好评"}];
     [_data addObject:seg2];
 }
 
@@ -116,15 +116,43 @@
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.editingAccessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selected = NO;
+        
+        UIImageView *imageP = [[UIImageView alloc]initWithFrame:CGRectMake(kDeviceWidth-44, (46-70)/2, 44, 70)];
+        imageP.image = [UIImage imageNamed:@"bt_04_J"];
+        [cell addSubview:imageP];
+        
+        UIImageView *headImg = [[UIImageView alloc]initWithFrame:CGRectMake(46/2-20/2, 46/2-20/2, 20, 20)];
+        headImg.tag = 10001;
+        [cell addSubview:headImg];
+        headImg.backgroundColor=[UIColor clearColor];
+        
+        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(58, 0, 100, 46)];
+        title.tag = 10002;
+        title.backgroundColor = [UIColor clearColor];
+        title.textAlignment = 0;
+        title.textColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:1.0];
+        title.font = [UIFont systemFontOfSize:14];
+        [cell addSubview:title];
+        
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 45, 320, 1)];
+        line.image = [UIImage imageNamed:@"gwc_line_"];
+        line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
+        [cell addSubview:line];
     }
     
-    cell.textLabel.text = [[[_data objectAtIndex:section] objectAtIndex:row] objectForKey:@"title"];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    //    cell.imageView.image = [[[_data objectAtIndex:section] objectAtIndex:row] objectForKey:@"img"];
+    ((UIImageView*)[cell viewWithTag:10001]).image = [UIImage imageNamed:[[[_data objectAtIndex:section] objectAtIndex:row] objectForKey:@"img"]];
+    ((UILabel*)[cell viewWithTag:10002]).text = [[[_data objectAtIndex:section] objectAtIndex:row] objectForKey:@"title"];
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 46;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
