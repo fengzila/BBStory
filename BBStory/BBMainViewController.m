@@ -89,20 +89,22 @@
 //    [self.view addSubview:_segControl];
     self.navigationItem.titleView = _segControl;
     
+    _allData = [[BBDataManager getInstance] getDataListWithKey:[_configData objectForKey:@"dataKey"]];
+    
+    [self initLoveListData];
+    
     mySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40)];
     mySearchBar.delegate = self;
+    [mySearchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [mySearchBar sizeToFit];
     [mySearchBar setPlaceholder:@"搜索"];
     [self.view addSubview:mySearchBar];
     
     searchDisplayController = [[UISearchDisplayController alloc]initWithSearchBar:mySearchBar contentsController:self];
     searchDisplayController.active = NO;
+    searchDisplayController.delegate = self;
     searchDisplayController.searchResultsDataSource = self;
     searchDisplayController.searchResultsDelegate = self;
-    
-    _allData = [[BBDataManager getInstance] getDataListWithKey:[_configData objectForKey:@"dataKey"]];
-    
-    [self initLoveListData];
-
     
     _allView = [[BBStoryTableView alloc] initWithFrame:CGRectMake(0, 86 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35) Data:_allData];
     _allView.delegate = self;
@@ -117,6 +119,12 @@
     [_allView scrollToRowAtIndexPath:lastReadPage];
     
     [self loadAdBanner];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self setAutomaticallyAdjustsScrollViewInsets:YES]; [self setExtendedLayoutIncludesOpaqueBars:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -311,27 +319,48 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    mySearchBar.frame = CGRectMake(0, _statusBarHeight, kDeviceWidth, 40);
-    
     searchBar.showsCancelButton = YES;
-    for(id cc in [searchBar subviews])
-    {
-        if([cc isKindOfClass:[UIButton class]])
-        {
-            UIButton *btn = (UIButton *)cc;
-            [btn setTitle:@"取消"  forState:UIControlStateNormal];
+    
+    NSArray *subViews;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        subViews = [(mySearchBar.subviews[0]) subviews];
+    }
+    else {
+        subViews = mySearchBar.subviews;
+    }
+    
+    for (id view in subViews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton* cancelbutton = (UIButton* )view;
+            [cancelbutton setTitle:@"取消" forState:UIControlStateNormal];
+            break;
         }
     }
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
+    [UIView animateWithDuration:0.35f animations:^{
+        mySearchBar.frame = CGRectMake(0, _statusBarHeight, kDeviceWidth, 40);
+        _allView.frame = CGRectMake(0, _statusBarHeight+mySearchBar.height, kDeviceWidth, kDeviceHeight - 35);
+    }];
+    
+    return YES;
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+-(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
+    if (searchResults.count > 0) {
+        return YES;
+    }
+    //搜索结束，恢复原状
+    [UIView animateWithDuration:0.35f animations:^{
+        mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
+        _allView.frame = CGRectMake(0, 86 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35);
+    }];
+    
+    return YES;
 }
 
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
@@ -344,18 +373,22 @@
     
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchResults removeAllObjects];
+    searchResults = NULL;
+    [UIView animateWithDuration:0.35f animations:^{
+        mySearchBar.frame = CGRectMake(0, 44 + _statusBarHeight, kDeviceWidth, 40);
+        _allView.frame = CGRectMake(0, 86 + _statusBarHeight, kDeviceWidth, kDeviceHeight - 35);
+    }];
+}
+
 #pragma mark - Open drawer button
 
 - (void)openDrawer:(id)sender
 {
     BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

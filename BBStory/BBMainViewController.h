@@ -12,7 +12,7 @@
 #import "BBSegmentedControl.h"
 #import <GoogleMobileAds/GADBannerView.h>
 
-@interface BBMainViewController : UIViewController<BBStoryTableViewDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate, ICSDrawerControllerChild, ICSDrawerControllerPresenting>
+@interface BBMainViewController : UIViewController<BBStoryTableViewDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource,UITableViewDelegate, ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 {
 @private
     NSDictionary *_configData;

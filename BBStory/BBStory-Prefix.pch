@@ -20,6 +20,7 @@
 
 #define PLATFORMSTATUS_NOTIFICATION @"kPlatformStatusNotification"
 #define IOS7_OR_LATER	([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
+#define IOS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 #define MY_BANNER_UNIT_ID       @"ca-app-pub-4220651662523392/3427502063"
 

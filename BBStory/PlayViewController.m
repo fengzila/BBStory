@@ -15,6 +15,7 @@
 #import "BBDataManager.h"
 #import "MobClick.h"
 #import "UMOnlineConfig.h"
+#import "UMFeedback.h"
 
 #define degressToRadian(x) (M_PI * (x)/180.0)
 #define ADViewHeight 0
@@ -514,13 +515,13 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSInteger hasEvaluated = [ud integerForKey:@"hasEvaluated"];
-    if (!hasEvaluated)
+    if (YES || !hasEvaluated)
     {
         int rate = [[UMOnlineConfig getConfigParams:@"evaluateAlertRate"] intValue];
         int value = (arc4random() % 100) + 0;
         if (value <= rate)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[UMOnlineConfig getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[UMOnlineConfig getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[UMOnlineConfig getConfigParams:@"evaluateAlertConfirmTitle"], nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[UMOnlineConfig getConfigParams:@"evaluateNotifyContent"] delegate:self cancelButtonTitle:[UMOnlineConfig getConfigParams:@"evaluateAlertCancelTitle"] otherButtonTitles:[UMOnlineConfig getConfigParams:@"evaluateAlertReviewTitle"], [UMOnlineConfig getConfigParams:@"evaluateAlertConfirmTitle"], nil];
             [alert show];
         }
     }
@@ -529,6 +530,12 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1)
+    {
+        // 吐槽
+        [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
+
+    }
+    else if (buttonIndex == 2)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"hasEvaluated"];
         

@@ -255,6 +255,31 @@
 		339694BC1BD91EAD00448F6D /* btn_record_start_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 339694B61BD91EAD00448F6D /* btn_record_start_dark@3x.png */; };
 		339694BD1BD91EAD00448F6D /* btn_record_start_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 339694B71BD91EAD00448F6D /* btn_record_start_dark@2x.png */; };
 		3399893B1BE1F69B00DE4448 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 339989391BE1F69B00DE4448 /* libMobClickLibrary.a */; };
+		33A2BE581C2A4EB700E9711B /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE2F1C2A4EB700E9711B /* UMFeedbackLocalizable.strings */; };
+		33A2BE591C2A4EB700E9711B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A2BE311C2A4EB700E9711B /* libUMFeedback.a */; };
+		33A2BE5A1C2A4EB700E9711B /* bubble_min@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE331C2A4EB700E9711B /* bubble_min@2x.png */; };
+		33A2BE5B1C2A4EB700E9711B /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE341C2A4EB700E9711B /* cancel@2x.png */; };
+		33A2BE5C1C2A4EB700E9711B /* microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE351C2A4EB700E9711B /* microphone@2x.png */; };
+		33A2BE5D1C2A4EB700E9711B /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE361C2A4EB700E9711B /* save@2x.png */; };
+		33A2BE5E1C2A4EB700E9711B /* ToolViewInputText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE371C2A4EB700E9711B /* ToolViewInputText@2x.png */; };
+		33A2BE5F1C2A4EB700E9711B /* ToolViewInputTextHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE381C2A4EB700E9711B /* ToolViewInputTextHL@2x.png */; };
+		33A2BE601C2A4EB700E9711B /* ToolViewInputVoice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE391C2A4EB700E9711B /* ToolViewInputVoice@2x.png */; };
+		33A2BE611C2A4EB700E9711B /* ToolViewInputVoiceHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3A1C2A4EB700E9711B /* ToolViewInputVoiceHL@2x.png */; };
+		33A2BE621C2A4EB700E9711B /* umeng_add_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3B1C2A4EB700E9711B /* umeng_add_photo@2x.png */; };
+		33A2BE631C2A4EB700E9711B /* umeng_fb_audio_dialog_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3C1C2A4EB700E9711B /* umeng_fb_audio_dialog_cancel@2x.png */; };
+		33A2BE641C2A4EB700E9711B /* umeng_fb_audio_dialog_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3D1C2A4EB700E9711B /* umeng_fb_audio_dialog_content@2x.png */; };
+		33A2BE651C2A4EB700E9711B /* umeng_fb_audio_play_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3E1C2A4EB700E9711B /* umeng_fb_audio_play_01@2x.png */; };
+		33A2BE661C2A4EB700E9711B /* umeng_fb_audio_play_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE3F1C2A4EB700E9711B /* umeng_fb_audio_play_02@2x.png */; };
+		33A2BE671C2A4EB700E9711B /* umeng_fb_audio_play_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE401C2A4EB700E9711B /* umeng_fb_audio_play_03@2x.png */; };
+		33A2BE681C2A4EB700E9711B /* umeng_fb_audio_play_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2BE411C2A4EB700E9711B /* umeng_fb_audio_play_default@2x.png */; };
+		33A2BE691C2A4EB700E9711B /* UMFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE441C2A4EB700E9711B /* UMFeedbackViewController.m */; };
+		33A2BE6A1C2A4EB700E9711B /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A2BE471C2A4EB700E9711B /* libUMOpus.a */; };
+		33A2BE6B1C2A4EB700E9711B /* UMChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE4C1C2A4EB700E9711B /* UMChatTableViewCell.m */; };
+		33A2BE6C1C2A4EB700E9711B /* UMChatToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE4E1C2A4EB700E9711B /* UMChatToolBar.m */; };
+		33A2BE6D1C2A4EB700E9711B /* UMFullScreenPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE501C2A4EB700E9711B /* UMFullScreenPhotoView.m */; };
+		33A2BE6E1C2A4EB700E9711B /* UMPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE521C2A4EB700E9711B /* UMPostTableViewCell.m */; };
+		33A2BE6F1C2A4EB700E9711B /* UMRadialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE541C2A4EB700E9711B /* UMRadialView.m */; };
+		33A2BE701C2A4EB700E9711B /* UMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2BE561C2A4EB700E9711B /* UMTextView.m */; };
 		33A2DB071C1ECBC800461E45 /* banner_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A2DB061C1ECBC800461E45 /* banner_1.png */; };
 		33A2DB0A1C1ED20400461E45 /* BBHomeBannerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2DB091C1ED20400461E45 /* BBHomeBannerScrollView.m */; };
 		33A2DB0C1C1FB4F200461E45 /* banner_2 in Resources */ = {isa = PBXBuildFile; fileRef = 33A2DB0B1C1FB4F200461E45 /* banner_2 */; };
@@ -818,6 +843,43 @@
 		339694B71BD91EAD00448F6D /* btn_record_start_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_record_start_dark@2x.png"; sourceTree = "<group>"; };
 		339989391BE1F69B00DE4448 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = Umeng/libMobClickLibrary.a; sourceTree = "<group>"; };
 		3399893A1BE1F69B00DE4448 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = Umeng/MobClick.h; sourceTree = "<group>"; };
+		33A2BE301C2A4EB700E9711B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
+		33A2BE311C2A4EB700E9711B /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
+		33A2BE331C2A4EB700E9711B /* bubble_min@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_min@2x.png"; sourceTree = "<group>"; };
+		33A2BE341C2A4EB700E9711B /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
+		33A2BE351C2A4EB700E9711B /* microphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone@2x.png"; sourceTree = "<group>"; };
+		33A2BE361C2A4EB700E9711B /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
+		33A2BE371C2A4EB700E9711B /* ToolViewInputText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputText@2x.png"; sourceTree = "<group>"; };
+		33A2BE381C2A4EB700E9711B /* ToolViewInputTextHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputTextHL@2x.png"; sourceTree = "<group>"; };
+		33A2BE391C2A4EB700E9711B /* ToolViewInputVoice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoice@2x.png"; sourceTree = "<group>"; };
+		33A2BE3A1C2A4EB700E9711B /* ToolViewInputVoiceHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoiceHL@2x.png"; sourceTree = "<group>"; };
+		33A2BE3B1C2A4EB700E9711B /* umeng_add_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_add_photo@2x.png"; sourceTree = "<group>"; };
+		33A2BE3C1C2A4EB700E9711B /* umeng_fb_audio_dialog_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_dialog_cancel@2x.png"; sourceTree = "<group>"; };
+		33A2BE3D1C2A4EB700E9711B /* umeng_fb_audio_dialog_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_dialog_content@2x.png"; sourceTree = "<group>"; };
+		33A2BE3E1C2A4EB700E9711B /* umeng_fb_audio_play_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_01@2x.png"; sourceTree = "<group>"; };
+		33A2BE3F1C2A4EB700E9711B /* umeng_fb_audio_play_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_02@2x.png"; sourceTree = "<group>"; };
+		33A2BE401C2A4EB700E9711B /* umeng_fb_audio_play_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_03@2x.png"; sourceTree = "<group>"; };
+		33A2BE411C2A4EB700E9711B /* umeng_fb_audio_play_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_default@2x.png"; sourceTree = "<group>"; };
+		33A2BE421C2A4EB700E9711B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
+		33A2BE431C2A4EB700E9711B /* UMFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedbackViewController.h; sourceTree = "<group>"; };
+		33A2BE441C2A4EB700E9711B /* UMFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFeedbackViewController.m; sourceTree = "<group>"; };
+		33A2BE451C2A4EB700E9711B /* UMOpenMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOpenMacros.h; sourceTree = "<group>"; };
+		33A2BE471C2A4EB700E9711B /* libUMOpus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOpus.a; sourceTree = "<group>"; };
+		33A2BE481C2A4EB700E9711B /* UMOpus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOpus.h; sourceTree = "<group>"; };
+		33A2BE491C2A4EB700E9711B /* UMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMRecorder.h; sourceTree = "<group>"; };
+		33A2BE4B1C2A4EB700E9711B /* UMChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMChatTableViewCell.h; sourceTree = "<group>"; };
+		33A2BE4C1C2A4EB700E9711B /* UMChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMChatTableViewCell.m; sourceTree = "<group>"; };
+		33A2BE4D1C2A4EB700E9711B /* UMChatToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMChatToolBar.h; sourceTree = "<group>"; };
+		33A2BE4E1C2A4EB700E9711B /* UMChatToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMChatToolBar.m; sourceTree = "<group>"; };
+		33A2BE4F1C2A4EB700E9711B /* UMFullScreenPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFullScreenPhotoView.h; sourceTree = "<group>"; };
+		33A2BE501C2A4EB700E9711B /* UMFullScreenPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFullScreenPhotoView.m; sourceTree = "<group>"; };
+		33A2BE511C2A4EB700E9711B /* UMPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPostTableViewCell.h; sourceTree = "<group>"; };
+		33A2BE521C2A4EB700E9711B /* UMPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPostTableViewCell.m; sourceTree = "<group>"; };
+		33A2BE531C2A4EB700E9711B /* UMRadialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMRadialView.h; sourceTree = "<group>"; };
+		33A2BE541C2A4EB700E9711B /* UMRadialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRadialView.m; sourceTree = "<group>"; };
+		33A2BE551C2A4EB700E9711B /* UMTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTextView.h; sourceTree = "<group>"; };
+		33A2BE561C2A4EB700E9711B /* UMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTextView.m; sourceTree = "<group>"; };
+		33A2BE571C2A4EB700E9711B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMFeedbackLocalizable.strings"; sourceTree = "<group>"; };
 		33A2DB061C1ECBC800461E45 /* banner_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_1.png; sourceTree = "<group>"; };
 		33A2DB081C1ED20400461E45 /* BBHomeBannerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBHomeBannerScrollView.h; sourceTree = "<group>"; };
 		33A2DB091C1ED20400461E45 /* BBHomeBannerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBHomeBannerScrollView.m; sourceTree = "<group>"; };
@@ -1011,7 +1073,9 @@
 				B26FAF5218D30281005C4ADD /* SystemConfiguration.framework in Frameworks */,
 				B26FAF5018D30263005C4ADD /* CoreTelephony.framework in Frameworks */,
 				B26FAF4E18D3018E005C4ADD /* AdSupport.framework in Frameworks */,
+				33A2BE6A1C2A4EB700E9711B /* libUMOpus.a in Frameworks */,
 				B26FAF4B18D2FD95005C4ADD /* libMobClickLibrary_armv6.a in Frameworks */,
+				33A2BE591C2A4EB700E9711B /* libUMFeedback.a in Frameworks */,
 				B22EE69B18CD925200CA9584 /* CoreData.framework in Frameworks */,
 				335899041C103B0000F27A8C /* TencentOpenAPI.framework in Frameworks */,
 				B22EE69918CD925200CA9584 /* UIKit.framework in Frameworks */,
@@ -1838,6 +1902,74 @@
 			path = audio;
 			sourceTree = "<group>";
 		};
+		33A2BE2E1C2A4EB700E9711B /* UMengFeedback_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				33A2BE2F1C2A4EB700E9711B /* UMFeedbackLocalizable.strings */,
+				33A2BE311C2A4EB700E9711B /* libUMFeedback.a */,
+				33A2BE321C2A4EB700E9711B /* Resources */,
+				33A2BE421C2A4EB700E9711B /* UMFeedback.h */,
+				33A2BE431C2A4EB700E9711B /* UMFeedbackViewController.h */,
+				33A2BE441C2A4EB700E9711B /* UMFeedbackViewController.m */,
+				33A2BE451C2A4EB700E9711B /* UMOpenMacros.h */,
+				33A2BE461C2A4EB700E9711B /* UMOpus */,
+				33A2BE491C2A4EB700E9711B /* UMRecorder.h */,
+				33A2BE4A1C2A4EB700E9711B /* Views */,
+			);
+			name = UMengFeedback_SDK;
+			path = Umeng/UMengFeedback_SDK;
+			sourceTree = "<group>";
+		};
+		33A2BE321C2A4EB700E9711B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				33A2BE331C2A4EB700E9711B /* bubble_min@2x.png */,
+				33A2BE341C2A4EB700E9711B /* cancel@2x.png */,
+				33A2BE351C2A4EB700E9711B /* microphone@2x.png */,
+				33A2BE361C2A4EB700E9711B /* save@2x.png */,
+				33A2BE371C2A4EB700E9711B /* ToolViewInputText@2x.png */,
+				33A2BE381C2A4EB700E9711B /* ToolViewInputTextHL@2x.png */,
+				33A2BE391C2A4EB700E9711B /* ToolViewInputVoice@2x.png */,
+				33A2BE3A1C2A4EB700E9711B /* ToolViewInputVoiceHL@2x.png */,
+				33A2BE3B1C2A4EB700E9711B /* umeng_add_photo@2x.png */,
+				33A2BE3C1C2A4EB700E9711B /* umeng_fb_audio_dialog_cancel@2x.png */,
+				33A2BE3D1C2A4EB700E9711B /* umeng_fb_audio_dialog_content@2x.png */,
+				33A2BE3E1C2A4EB700E9711B /* umeng_fb_audio_play_01@2x.png */,
+				33A2BE3F1C2A4EB700E9711B /* umeng_fb_audio_play_02@2x.png */,
+				33A2BE401C2A4EB700E9711B /* umeng_fb_audio_play_03@2x.png */,
+				33A2BE411C2A4EB700E9711B /* umeng_fb_audio_play_default@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		33A2BE461C2A4EB700E9711B /* UMOpus */ = {
+			isa = PBXGroup;
+			children = (
+				33A2BE471C2A4EB700E9711B /* libUMOpus.a */,
+				33A2BE481C2A4EB700E9711B /* UMOpus.h */,
+			);
+			path = UMOpus;
+			sourceTree = "<group>";
+		};
+		33A2BE4A1C2A4EB700E9711B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33A2BE4B1C2A4EB700E9711B /* UMChatTableViewCell.h */,
+				33A2BE4C1C2A4EB700E9711B /* UMChatTableViewCell.m */,
+				33A2BE4D1C2A4EB700E9711B /* UMChatToolBar.h */,
+				33A2BE4E1C2A4EB700E9711B /* UMChatToolBar.m */,
+				33A2BE4F1C2A4EB700E9711B /* UMFullScreenPhotoView.h */,
+				33A2BE501C2A4EB700E9711B /* UMFullScreenPhotoView.m */,
+				33A2BE511C2A4EB700E9711B /* UMPostTableViewCell.h */,
+				33A2BE521C2A4EB700E9711B /* UMPostTableViewCell.m */,
+				33A2BE531C2A4EB700E9711B /* UMRadialView.h */,
+				33A2BE541C2A4EB700E9711B /* UMRadialView.m */,
+				33A2BE551C2A4EB700E9711B /* UMTextView.h */,
+				33A2BE561C2A4EB700E9711B /* UMTextView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		33C22A781B27CA7000302D2D /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2147,6 +2279,7 @@
 		B26FAF4718D2FD89005C4ADD /* umeng */ = {
 			isa = PBXGroup;
 			children = (
+				33A2BE2E1C2A4EB700E9711B /* UMengFeedback_SDK */,
 				33549F961C2157B5000817E8 /* UMessage_Sdk_1.2.2 */,
 				3358972B1C103AFF00F27A8C /* umeng_community_ios_sdk_v2.2.1(20151203) */,
 				3358953D1C10299500F27A8C /* libUMOnlineConfig.a */,
@@ -2261,6 +2394,7 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = B22EE68818CD925100CA9584;
 			productRefGroup = B22EE69218CD925200CA9584 /* Products */;
@@ -2288,7 +2422,9 @@
 				33F6E1EA1BE0C678005E7449 /* toolbar_next_n_p@3x.png in Resources */,
 				336C5F8D1BD7983E00B8F395 /* You Are Haneulmalraria.mp3 in Resources */,
 				336B679B1C15C1E7001A7D02 /* bt_04_J@2x.png in Resources */,
+				33A2BE5F1C2A4EB700E9711B /* ToolViewInputTextHL@2x.png in Resources */,
 				335898D01C103B0000F27A8C /* UMComFeedDetailViewController.xib in Resources */,
+				33A2BE681C2A4EB700E9711B /* umeng_fb_audio_play_default@2x.png in Resources */,
 				335E45011C12A3F3003660D4 /* icon_user.png in Resources */,
 				339694BC1BD91EAD00448F6D /* btn_record_start_dark@3x.png in Resources */,
 				335899001C103B0000F27A8C /* UMSShareListController.xib in Resources */,
@@ -2331,10 +2467,12 @@
 				33F6E2081BE1B85B005E7449 /* menu_recorder_light@3x.png in Resources */,
 				334F10B91BAFEE9E008960D5 /* btn_more@2x.png in Resources */,
 				335899051C103B0000F27A8C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				33A2BE5E1C2A4EB700E9711B /* ToolViewInputText@2x.png in Resources */,
 				B26FAF1A18D132B6005C4ADD /* unicode_to_hanyu_pinyin.txt in Resources */,
 				33F6E2031BE1B85B005E7449 /* menu_game_light@2x.png in Resources */,
 				33C22A9C1B291FDA00302D2D /* games_2048@2x.png in Resources */,
 				33E13EA41B26CE74001BD487 /* btn_menu@2x.png in Resources */,
+				33A2BE631C2A4EB700E9711B /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				339694BA1BD91EAD00448F6D /* btn_record_pause_dark@3x.png in Resources */,
 				334F10A51BAFED2D008960D5 /* tips@2x.png in Resources */,
 				33549F7D1C20F208000817E8 /* category_1@3x.png in Resources */,
@@ -2361,8 +2499,10 @@
 				33549F811C20F604000817E8 /* category_2@3x.png in Resources */,
 				334F10BD1BAFEE9E008960D5 /* btn_unlove@3x.png in Resources */,
 				33549F931C215395000817E8 /* btn_record_close.png in Resources */,
+				33A2BE601C2A4EB700E9711B /* ToolViewInputVoice@2x.png in Resources */,
 				339694A81BD9158000448F6D /* record_bgMusic_dark@2x.png in Resources */,
 				335898F61C103B0000F27A8C /* UMSocialLocalizable.strings in Resources */,
+				33A2BE651C2A4EB700E9711B /* umeng_fb_audio_play_01@2x.png in Resources */,
 				336C5F861BD7983E00B8F395 /* record_bgMusic_local@2x.png in Resources */,
 				33E13E971B26BCBB001BD487 /* menu_smallStory.png in Resources */,
 				335E44F41C11BBB2003660D4 /* tabbar_me@3x.png in Resources */,
@@ -2376,6 +2516,7 @@
 				B2E2AEC018D6E9C90005A4CC /* Default@2x.png in Resources */,
 				336C5F871BD7983E00B8F395 /* record_bgMusic_local@3x.png in Resources */,
 				33E226231B7F394B00F8D561 /* games_popstar.png in Resources */,
+				33A2BE5C1C2A4EB700E9711B /* microphone@2x.png in Resources */,
 				335898C31C103AFF00F27A8C /* UMComLocationTableViewCell.xib in Resources */,
 				33E13E9B1B26C4C2001BD487 /* menu_game@2x.png in Resources */,
 				335E45091C12B8EB003660D4 /* btn_back_n@2x.png in Resources */,
@@ -2398,9 +2539,11 @@
 				33F6E2041BE1B85B005E7449 /* menu_rate_light.png in Resources */,
 				33C22A9F1B291FDA00302D2D /* games_pintu@2x.png in Resources */,
 				B2E2AEB918D6E9010005A4CC /* Icon.png in Resources */,
+				33A2BE5B1C2A4EB700E9711B /* cancel@2x.png in Resources */,
 				B2E2AEB618D6E9010005A4CC /* Icon-120@2x.png in Resources */,
 				B2E2AEB818D6E9010005A4CC /* Icon-Small@2x.png in Resources */,
 				33BEAE671C1063C100FF5DC2 /* btn_backTop@2x.png in Resources */,
+				33A2BE671C2A4EB700E9711B /* umeng_fb_audio_play_03@2x.png in Resources */,
 				B22EE6A118CD925200CA9584 /* InfoPlist.strings in Resources */,
 				336C5F7E1BD7983E00B8F395 /* btn_record_pause-iPad@2x.png in Resources */,
 				33BEAE681C1063C100FF5DC2 /* btn_backTopLight.png in Resources */,
@@ -2412,6 +2555,7 @@
 				B2BEA3A11B9C856000B93357 /* games_spacerover@2x.png in Resources */,
 				33F6E1F81BE0FFCE005E7449 /* menu_recorder@3x.png in Resources */,
 				339694A61BD9158000448F6D /* record_bgMusic_dark-667h@2x.png in Resources */,
+				33A2BE581C2A4EB700E9711B /* UMFeedbackLocalizable.strings in Resources */,
 				334F10B21BAFEE9E008960D5 /* btn_back.png in Resources */,
 				33C22AA21B2920E400302D2D /* games_stick.png in Resources */,
 				33F6E1ED1BE0C678005E7449 /* toolbar_prev_n_p@2x.png in Resources */,
@@ -2434,9 +2578,11 @@
 				334F10BA1BAFEE9E008960D5 /* btn_more@3x.png in Resources */,
 				336C5F811BD7983E00B8F395 /* btn_record_start-iPad@2x.png in Resources */,
 				B2E2AEBF18D6E9C90005A4CC /* Default.png in Resources */,
+				33A2BE5A1C2A4EB700E9711B /* bubble_min@2x.png in Resources */,
 				336C5F8A1BD7983E00B8F395 /* record_bgMusic_n@2x.png in Resources */,
 				33F6E1E71BE0C678005E7449 /* toolbar_loading_n_p@2x.png in Resources */,
 				33C22A9D1B291FDA00302D2D /* games_bird@2x.png in Resources */,
+				33A2BE5D1C2A4EB700E9711B /* save@2x.png in Resources */,
 				334F10B51BAFEE9E008960D5 /* btn_loved.png in Resources */,
 				33F6E20A1BE1B85B005E7449 /* menu_smallStory_light@2x.png in Resources */,
 				335898B21C103AFF00F27A8C /* UMComTableViewCell.xib in Resources */,
@@ -2445,12 +2591,14 @@
 				335898CE1C103B0000F27A8C /* UMComCommentTableViewCell.xib in Resources */,
 				33F6E1EE1BE0C678005E7449 /* toolbar_prev_n_p@3x.png in Resources */,
 				335898C61C103AFF00F27A8C /* UMComFeedsTableViewCell.xib in Resources */,
+				33A2BE611C2A4EB700E9711B /* ToolViewInputVoiceHL@2x.png in Resources */,
 				B2E2AEB418D6E9010005A4CC /* Icon-80.png in Resources */,
 				339694A71BD9158000448F6D /* record_bgMusic_dark-iPad@2x.png in Resources */,
 				339694BB1BD91EAD00448F6D /* btn_record_start_dark-iPad@2x.png in Resources */,
 				33F6E1E91BE0C678005E7449 /* toolbar_next_n_p@2x.png in Resources */,
 				336C5F7F1BD7983E00B8F395 /* btn_record_pause@2x.png in Resources */,
 				33E226281B7F44BC00F8D561 /* menu_weibo@2x.png in Resources */,
+				33A2BE621C2A4EB700E9711B /* umeng_add_photo@2x.png in Resources */,
 				335E44F01C11BBB2003660D4 /* tabbar_home@3x.png in Resources */,
 				336C5F651BD78CD100B8F395 /* btn_recording@2x.png in Resources */,
 				33E13E951B26BCBB001BD487 /* menu_game.png in Resources */,
@@ -2465,6 +2613,8 @@
 				33F6E2061BE1B85B005E7449 /* menu_recorder_light.png in Resources */,
 				33C22A9B1B291FDA00302D2D /* games_2car@2x.png in Resources */,
 				B2BEA3A01B9C856000B93357 /* games_spacerover.png in Resources */,
+				33A2BE641C2A4EB700E9711B /* umeng_fb_audio_dialog_content@2x.png in Resources */,
+				33A2BE661C2A4EB700E9711B /* umeng_fb_audio_play_02@2x.png in Resources */,
 				335898FF1C103B0000F27A8C /* UMSnsAccountViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2485,6 +2635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335898B61C103AFF00F27A8C /* UMComActionPickerAddView.m in Sources */,
+				33A2BE6C1C2A4EB700E9711B /* UMChatToolBar.m in Sources */,
 				B2E2AEC118D7BD2C0005A4CC /* BBCycleViewController.h in Sources */,
 				33E13E8E1B26AD86001BD487 /* ICSDropShadowView.m in Sources */,
 				335898CA1C103B0000F27A8C /* UMComHomeFeedViewController.m in Sources */,
@@ -2498,6 +2649,7 @@
 				335E44E41C112BC5003660D4 /* BBNavigationController.m in Sources */,
 				3358988E1C103AFF00F27A8C /* UMComBarButtonItem.m in Sources */,
 				335898A01C103AFF00F27A8C /* UMImagePickerController.m in Sources */,
+				33A2BE6F1C2A4EB700E9711B /* UMRadialView.m in Sources */,
 				335898F41C103B0000F27A8C /* UMComEditViewModel.m in Sources */,
 				335898861C103AFF00F27A8C /* UMComUMengMessageHandler.m in Sources */,
 				335898891C103AFF00F27A8C /* UMComModel.xcdatamodeld in Sources */,
@@ -2511,6 +2663,7 @@
 				335CC60B1BDDC2640023F635 /* BBRecorderObject.m in Sources */,
 				335898C91C103B0000F27A8C /* UMComFeedTableViewController.m in Sources */,
 				335898AE1C103AFF00F27A8C /* UMComRefreshView.m in Sources */,
+				33A2BE701C2A4EB700E9711B /* UMTextView.m in Sources */,
 				3358987C1C103AFF00F27A8C /* UMComAction.m in Sources */,
 				33C22A801B27CA9B00302D2D /* CustomURLCache.m in Sources */,
 				335898E51C103B0000F27A8C /* UMComMessageSettingViewController.m in Sources */,
@@ -2521,6 +2674,8 @@
 				335898971C103AFF00F27A8C /* UMComMutiStyleTextView.m in Sources */,
 				335898DE1C103B0000F27A8C /* UMComFilterTopicsViewCell.m in Sources */,
 				3358987D1C103AFF00F27A8C /* UMComLoginAction.m in Sources */,
+				33A2BE6B1C2A4EB700E9711B /* UMChatTableViewCell.m in Sources */,
+				33A2BE6D1C2A4EB700E9711B /* UMFullScreenPhotoView.m in Sources */,
 				335898CC1C103B0000F27A8C /* UMComTopicFeedViewController.m in Sources */,
 				335898E11C103B0000F27A8C /* UMComTopicsTableViewController.m in Sources */,
 				33A2DB0A1C1ED20400461E45 /* BBHomeBannerScrollView.m in Sources */,
@@ -2615,6 +2770,7 @@
 				33E13E911B26ADE1001BD487 /* BBMenuViewController.m in Sources */,
 				335CC6121BDE4C6E0023F635 /* BBRecordListController.m in Sources */,
 				336B67AB1C181168001A7D02 /* BBCategoryTableView.m in Sources */,
+				33A2BE691C2A4EB700E9711B /* UMFeedbackViewController.m in Sources */,
 				33FD48801BB0F17B00D4088C /* BBInfoSettingView.m in Sources */,
 				B27A073C18CE9B7600149907 /* BBStoryTableView.m in Sources */,
 				3358989D1C103AFF00F27A8C /* UMAssetsCollectionController.m in Sources */,
@@ -2635,6 +2791,7 @@
 				335898D11C103B0000F27A8C /* UMComLikeListView.m in Sources */,
 				3356C4B41C1059960050F48F /* BBFindNavController.m in Sources */,
 				33E13EA01B26C7B9001BD487 /* BBGamesViewController.m in Sources */,
+				33A2BE6E1C2A4EB700E9711B /* UMPostTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2664,6 +2821,15 @@
 				3358986C1C103AFF00F27A8C /* zh-Hans */,
 			);
 			name = UMSocialLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		33A2BE2F1C2A4EB700E9711B /* UMFeedbackLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33A2BE301C2A4EB700E9711B /* Base */,
+				33A2BE571C2A4EB700E9711B /* zh-Hans */,
+			);
+			name = UMFeedbackLocalizable.strings;
 			sourceTree = "<group>";
 		};
 		B22EE69F18CD925200CA9584 /* InfoPlist.strings */ = {
@@ -2790,6 +2956,8 @@
 					"$(PROJECT_DIR)/BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/BBStory/Umeng/UMessage_Sdk_1.2.2",
+					"$(PROJECT_DIR)/BBStory/Umeng/UMengFeedback_SDK",
+					"$(PROJECT_DIR)/BBStory/Umeng/UMengFeedback_SDK/UMOpus",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2831,6 +2999,8 @@
 					"$(PROJECT_DIR)/BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/BBStory/Umeng/umeng_community_ios_sdk_v2.2.1(20151203)/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/BBStory/Umeng/UMessage_Sdk_1.2.2",
+					"$(PROJECT_DIR)/BBStory/Umeng/UMengFeedback_SDK",
+					"$(PROJECT_DIR)/BBStory/Umeng/UMengFeedback_SDK/UMOpus",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

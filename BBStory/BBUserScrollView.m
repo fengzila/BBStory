@@ -10,6 +10,7 @@
 #import "BBRecordCategoryListController.h"
 #import "BBGamesViewController.h"
 #import "MobClick.h"
+#import "UMFeedback.h"
 
 @implementation BBUserScrollView
 
@@ -60,6 +61,7 @@
     
     NSMutableArray *seg2 = [[NSMutableArray alloc] init];
     [seg2 addObject:@{@"img" : @"menu_game", @"title" : @"爸比的游戏"}];
+    [seg2 addObject:@{@"img" : @"menu_rate", @"title" : @"问题反馈"}];
     [seg2 addObject:@{@"img" : @"menu_rate", @"title" : @"五星好评"}];
     [_data addObject:seg2];
 }
@@ -138,7 +140,7 @@
         title.font = [UIFont systemFontOfSize:14];
         [cell addSubview:title];
         
-        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 45, 320, 1)];
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 45, kDeviceWidth, 1)];
         line.image = [UIImage imageNamed:@"gwc_line_"];
         line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
         [cell addSubview:line];
@@ -178,6 +180,10 @@
             [self.delegate pushInfoVC:gameVC];
         }
         else if(row == 1)
+        {
+            [self.delegate pushInfoVC:[UMFeedback feedbackViewController]];
+        }
+        else if(row == 2)
         {
             [MobClick event:@"btn_menu_rate"];
             [BBFunction goToAppStoreEvaluate:842439221];

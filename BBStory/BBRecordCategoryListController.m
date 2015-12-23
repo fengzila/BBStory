@@ -104,7 +104,7 @@
         desc.font = [UIFont systemFontOfSize:13];
         [cell addSubview:desc];
         
-        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 89, 320, 1)];
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 89, kDeviceWidth, 1)];
         line.image = [UIImage imageNamed:@"gwc_line_"];
         line.backgroundColor=[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1.0];
         [cell addSubview:line];
