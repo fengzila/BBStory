@@ -14,13 +14,14 @@
 {
 @private
     int _index;
+    NSDictionary* _configData;
     NSArray* _data;
     NSString *_musicKey;
     UILabel *_pageLabel;
 }
 
 @property(nonatomic, weak) ICSDrawerController *drawer;
-- (id)initWithIndex:(int)index;
+- (id)initWithIndex:(int)index ConfigData:(NSDictionary*)configData;
 - (void)playNewSound;
 - (void)pause;
 

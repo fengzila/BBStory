@@ -217,7 +217,7 @@
     propertySetError = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof(allowMixing), &allowMixing);
     UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
     AudioSessionSetProperty (kAudioSessionProperty_OverrideAudioRoute,sizeof (audioRouteOverride),&audioRouteOverride);
-    NSLog(@"Mixing: %x", propertySetError); // This should be 0 or there was an issue somewhere
+    NSLog(@"Mixing: %x", (int)propertySetError); // This should be 0 or there was an issue somewhere
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
 }
 
@@ -268,13 +268,18 @@
 
 - (void)backAction
 {
+    [self stopRecord];
+    [self hiddenWithAnimation];
+}
+
+- (void)stopRecord
+{
     if (_isRecording) {
         _recorder = nil;
         _avAudioPlayer = nil;
         [timer invalidate];
         timer = nil;
     }
-    [self hiddenWithAnimation];
 }
 
 - (void)recordingAction
@@ -378,9 +383,9 @@
     NSInteger s = floorf(t - h * 60 * 60 - m * 60);
     
     if (h > 0) {
-        return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", h, m, s];
+        return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)h, m, s];
     } else {
-        return [NSString stringWithFormat:@"%02ld:%02ld", m, s];
+        return [NSString stringWithFormat:@"%02ld:%02ld", (long)m, s];
     }
 }
 

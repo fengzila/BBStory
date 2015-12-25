@@ -46,7 +46,7 @@
         _tableView.delegate = self;
         [_baseView addSubview:_tableView];
         
-        _baseView.contentSize = CGSizeMake(self.bounds.size.width, self.width*.6f+h + 100);
+        _baseView.contentSize = CGSizeMake(self.bounds.size.width, self.width*.6f+h + 50);
     }
     return self;
 }
@@ -61,7 +61,7 @@
     
     NSMutableArray *seg2 = [[NSMutableArray alloc] init];
     [seg2 addObject:@{@"img" : @"menu_game", @"title" : @"爸比的游戏"}];
-    [seg2 addObject:@{@"img" : @"menu_rate", @"title" : @"问题反馈"}];
+    [seg2 addObject:@{@"img" : @"menu_feedback", @"title" : @"问题反馈"}];
     [seg2 addObject:@{@"img" : @"menu_rate", @"title" : @"五星好评"}];
     [_data addObject:seg2];
 }

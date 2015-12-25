@@ -135,9 +135,8 @@
     {
         NSMutableArray *categoryData = [[BBDataManager getInstance] getCategoryDataList];
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[[categoryData objectAtIndex:row] objectForKey:@"recordKey"]];
-        NSString *title = [[categoryData objectAtIndex:row] objectForKey:@"title"];
         BBAppDelegate *appDelegate = (BBAppDelegate*)[[UIApplication sharedApplication] delegate];
-        BBRecordListController *recordVC = [[BBRecordListController alloc] initWithData:data Title:title];
+        BBRecordListController *recordVC = [[BBRecordListController alloc] initWithData:data ConfigData:[categoryData objectAtIndex:row]];
         [appDelegate.navigationController pushViewController:recordVC animated:YES];
     }
 }

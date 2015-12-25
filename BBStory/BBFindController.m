@@ -79,12 +79,6 @@
     
 }
 
-- (void)pushInfoVCWithData:(BBRecorderObject*)data index:(int)index
-{
-    PlayViewController *infoVC = [[PlayViewController alloc] initWithIndex:index];
-    [self.navigationController pushViewController:infoVC animated:YES];
-}
-
 #pragma mark - Configuring the view’s layout behavior
 
 - (BOOL)prefersStatusBarHidden

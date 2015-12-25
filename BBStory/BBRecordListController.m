@@ -31,19 +31,19 @@
     return self;
 }
 
-- (id)initWithData:(NSData*)data Title:(NSString*)title
+- (id)initWithData:(NSData*)data ConfigData:(NSDictionary*)configData;
 {
     self = [super init];
     if (self) {
         _data = data;
-        _title = title;
+        _configData = configData;
     }
     return self;
 }
 
 - (void)loadView
 {
-    self.navigationItem.title = _title;
+    self.navigationItem.title = [_configData objectForKey:@"title"];
     
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view = view;
@@ -56,14 +56,13 @@
 
 - (void)pushInfoVCWithData:(BBRecorderObject*)data index:(int)index
 {
-    PlayViewController *infoVC = [[PlayViewController alloc] initWithIndex:index];
+    PlayViewController *infoVC = [[PlayViewController alloc] initWithIndex:index ConfigData:_configData];
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

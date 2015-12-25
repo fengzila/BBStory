@@ -37,4 +37,5 @@
 
 - (id)initWithFrame:(CGRect)frame Data:(NSDictionary*)data ConfigData:(NSDictionary*)configData;
 -(void)showWithAnimation;
+-(void)stopRecord;
 @end

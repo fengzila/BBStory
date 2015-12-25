@@ -10,10 +10,13 @@
 #import <GoogleMobileAds/GADInterstitial.h>
 #import "BBNavigationController.h"
 
-@interface BBAppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate>
+#import "GDTSplashAd.h"
+
+@interface BBAppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate, GDTSplashAdDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong,nonatomic)BBNavigationController *navigationController;
+@property (strong, nonatomic) GDTSplashAd *splash;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

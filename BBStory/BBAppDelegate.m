@@ -101,11 +101,20 @@
     NSData* tangshiData  = [[NSUserDefaults standardUserDefaults] objectForKey:UD_RECORDER_TANGSHI_LIST];
     int openInterstitial = [[UMOnlineConfig getConfigParams:@"openInterstitial"] intValue];
     if (openInterstitial > 0 && ([storyData length] > 0 || [tangshiData length] > 0)) {
-        self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-4220651662523392/9866073260"];
-        self.interstitial.delegate = self;
-        
-        GADRequest *request = [GADRequest request];
-        [self.interstitial loadRequest:request];
+        //开屏广告初始化并展示代码
+    //    GDTSplashAd *splash = [[GDTSplashAd alloc] initWithAppkey:@"1104971211" placementId:@"8030308707299089"];
+        GDTSplashAd *splash = [[GDTSplashAd alloc] initWithAppkey:@"1101508191" placementId:@"1020003690642397"];
+        splash.delegate = self; //设置代理
+        //根据iPhone设备不同设置不同背景图
+        if ([[UIScreen mainScreen] bounds].size.height >= 568.0f) {
+            splash.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Default-568h"]];
+        } else {
+            splash.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Default"]];
+        }
+        splash.fetchDelay = 3; //开发者可以设置开屏拉取时间,超时则放弃展示
+        //开屏广告拉取并展示在当前window中
+        [splash loadAdAndShowInWindow:self.window];
+        self.splash = splash;
     }
     
     return YES;
@@ -299,6 +308,27 @@
 /// ad that will launch another application (such as the App Store).
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad {
     NSLog(@"interstitialWillLeaveApplication");
+}
+
+//开屏广告成功展示 -(void)splashAdSuccessPresentScreen:(GDTSplashAd *)splashAd; //开屏广告展示失败
+-(void)splashAdFailToPresent:(GDTSplashAd *)splashAd withError:(NSError *)error
+{
+    NSLog(@"splashAdFailToPresent error: %@", [error localizedDescription]);
+}
+//应用进入后台时回调
+- (void)splashAdApplicationWillEnterBackground:(GDTSplashAd *)splashAd
+{
+    NSLog(@"splashAdApplicationWillEnterBackground");
+}
+//开屏广告点击回调
+- (void)splashAdClicked:(GDTSplashAd *)splashAd
+{
+    NSLog(@"splashAdClicked");
+}
+//开屏广告关闭回调
+- (void)splashAdClosed:(GDTSplashAd *)splashAd
+{
+    NSLog(@"splashAdClosed");
 }
 
 @end

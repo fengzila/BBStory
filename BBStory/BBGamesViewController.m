@@ -71,19 +71,16 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
     tipsLabel.text = @"下载";
     [self.view addSubview:tipsLabel];
     
-//    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, statusBarHeight + 45, kDeviceWidth, kDeviceHeight - 45)];
-//    webView.delegate = self;
-//    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://1.xiaobaba.sinaapp.com/ad/games.html"]];
-//    [webView loadRequest:request];
-//    [self.view addSubview: webView];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, statusBarHeight + 45, kDeviceWidth, kDeviceHeight - 45)];
+    webView.delegate = self;
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://7xnp2a.com1.z0.glb.clouddn.com/gameWeb/games.html"]];
+    [webView loadRequest:request];
+    [self.view addSubview: webView];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarHeight + 40, kDeviceWidth, kDeviceHeight - statusBarHeight - 40) style:UITableViewStylePlain];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
-    
-    [[BBDataManager getInstance] getDrawer].DisEnableTouchMove = YES;
 }
 
 - (void)initData
@@ -113,6 +110,8 @@ static NSString * const kGamesViewControllerCellReuseId = @"kGamesViewController
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+    [self.view addSubview:self.tableView];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {

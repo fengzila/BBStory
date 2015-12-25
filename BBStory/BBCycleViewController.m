@@ -13,6 +13,7 @@
 #import "BBBannerManager.h"
 #import "BBMainViewController.h"
 #import "UMFeedback.h"
+#import "BBDoRecordingController.h"
 
 @interface BBCycleViewController ()
 
@@ -63,12 +64,6 @@
     _tabbarLine.image = [UIImage imageNamed:@"btn_bg"];
     [_tabbarView addSubview:_tabbarLine];
     
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [backBtn setFrame:CGRectMake(20, _tabbarView.height*.5 - 32*.5, 32, 32)];
-//    [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-//    [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
-//    [_tabbarView addSubview:backBtn];
-    
     _recordingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_recordingBtn setFrame:CGRectMake(kDeviceWidth - 120 - 24, _tabbarView.height*.5 - 24*.5 - 2, 24, 24)];
     [_recordingBtn addTarget:self action:@selector(recordingAction) forControlEvents:UIControlEventTouchUpInside];
@@ -105,8 +100,8 @@
     _infoSettingView.delegate = self;
     [self.view addSubview:_infoSettingView];
     
-    _doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, kDeviceHeight, kDeviceWidth, kDeviceHeight)];
-    [self.view addSubview:_doRecordingView];
+//    _doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, kDeviceHeight, kDeviceWidth, kDeviceHeight)];
+//    [self.view addSubview:_doRecordingView];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
@@ -121,19 +116,17 @@
 
 }
 
-- (void)backAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    self.drawer.DisEnableTouchMove = NO;
-}
-
 - (void)recordingAction
 {
     NSDictionary *curData = [_data objectAtIndex:_csView.curPage];
-    BBDoRecordingView* doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) Data:curData ConfigData:_configData];
-    [self.view addSubview:doRecordingView];
-    [doRecordingView showWithAnimation];
+//    BBDoRecordingView* doRecordingView = [[BBDoRecordingView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight) Data:curData ConfigData:_configData];
+//    [self.view addSubview:doRecordingView];
+////    [self presentViewController:doRecordingView animated:YES completion:nil];
+//    [doRecordingView showWithAnimation];
     [MobClick event:@"touchRecorderShowBtn" attributes:@{@"recorderId" : [NSString stringWithFormat:@"%@", [curData objectForKey:@"id"]], @"name" : [curData objectForKey:@"title"]}];
+    
+    BBDoRecordingController* doRecordingVC = [[BBDoRecordingController alloc] initWithData:curData ConfigData:_configData];
+    [self presentViewController:doRecordingVC animated:YES completion:nil];
 }
 
 - (void)loveAction
@@ -142,7 +135,7 @@
         
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         NSInteger hasEvaluated = [ud integerForKey:@"hasEvaluated"];
-        if (YES || !hasEvaluated)
+        if (!hasEvaluated)
         {
             int rate = [[UMOnlineConfig getConfigParams:@"evaluateAlertRate"] intValue];
             int value = (arc4random() % 100) + 0;
@@ -213,9 +206,13 @@
     if (isDarkMode) {
         _tabbarView.backgroundColor = [UIColor colorWithRed:17/255.0 green:17/255.0 blue:17/255.0 alpha:1];
         [_tabbarLine setAlpha:.12];
+        self.navigationController.navigationBar.backgroundColor = [UIColor blackColor];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     } else {
         _tabbarView.backgroundColor = [UIColor whiteColor];
         [_tabbarLine setAlpha:1];
+        self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     }
 }
 
@@ -350,6 +347,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+//    [_doRecordingView stopRecord];
 }
 
 

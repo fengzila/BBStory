@@ -14,9 +14,10 @@
 {
 @private
     NSData* _data;
+    NSDictionary* _configData;
     NSString* _title;
 }
 
-- (id)initWithData:(NSData*)data Title:(NSString*)title;
+- (id)initWithData:(NSData*)data ConfigData:(NSDictionary*)configData;
 
 @end

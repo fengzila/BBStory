@@ -25,7 +25,7 @@
 @property (nonatomic, strong) UILabel *musicTitle;            // title
 @property (nonatomic, strong) UILabel *progressTitle;
 @property (nonatomic, strong) UILabel *progressMaxTitle;
-@property (nonatomic, strong) UIProgressView *progressV; // 播放进度
+@property (nonatomic, strong) UISlider *progressV; // 播放进度
 @property (nonatomic, strong) UISlider *volumeSlider;    // 声音控制
 @property (nonatomic, strong) UIImageView *musicImageView;   // 封面
 @property (nonatomic, strong) NSTimer *timer;            // 监控音频播放进度
@@ -36,25 +36,14 @@
 
 @implementation PlayViewController
 
-- (id)initWithIndex:(int)index
+- (id)initWithIndex:(int)index ConfigData:(NSDictionary*)configData
 {
     self = [super init];
     if (self) {
         _index = index;
-        NSString *recorderListKey;
-        switch ([[BBDataManager getInstance] getCurContentDataType]) {
-            case kContentDataTypeStory:
-                recorderListKey = UD_RECORDER_STORY_LIST;
-                _musicKey = @"story";
-                break;
-            case kContentDataTypeTangshi:
-                recorderListKey = UD_RECORDER_TANGSHI_LIST;
-                _musicKey = @"tangshi";
-                break;
-                
-            default:
-                break;
-        }
+        _configData = configData;
+        NSString *recorderListKey = [_configData objectForKey:@"recordKey"];
+        _musicKey = [_configData objectForKey:@"recordPrefix"];
         NSData* data  = [[NSUserDefaults standardUserDefaults] objectForKey:recorderListKey];
         _data = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -228,20 +217,26 @@
     int paddingBottom = 90;
     
     // 初始化一个播放进度条
-    _progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(0, screenSize.height - paddingBottom, screenSize.width, 20)];
-    [_progressV setProgressTintColor:[UIColor colorWithRed:249.0f/255.0f green:63.0f/255.0f blue:30.0f/255.0f alpha:1.0f]];
-    [_progressV setProgressViewStyle:UIProgressViewStyleBar];
-    [_progressV setBackgroundColor:[UIColor colorWithRed:114/255.0f green:114/255.0f blue:114/255.0f alpha:114/255.0f]];
+    _progressV = [[UISlider alloc] initWithFrame:CGRectMake(0, screenSize.height - paddingBottom, screenSize.width, 20)];
+    _progressV.backgroundColor = [UIColor clearColor];
+    _progressV.value=0.0;
+    [_progressV setMinimumTrackTintColor:[UIColor colorWithRed:249.0f/255.0f green:63.0f/255.0f blue:30.0f/255.0f alpha:1.0f]];
+    [_progressV setMaximumTrackTintColor:[UIColor colorWithRed:114/255.0f green:114/255.0f blue:114/255.0f alpha:114/255.0f]];
+//    [_progressV setProgressTintColor:[UIColor colorWithRed:249.0f/255.0f green:63.0f/255.0f blue:30.0f/255.0f alpha:1.0f]];
+//    [_progressV setProgressViewStyle:UIProgressViewStyleBar];
+//    [_progressV setBackgroundColor:[UIColor colorWithRed:114/255.0f green:114/255.0f blue:114/255.0f alpha:114/255.0f]];
     [self.view addSubview:_progressV];
+    //滑块拖动时的事件
+    [_progressV addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-    _progressMaxTitle = [[UILabel alloc] initWithFrame:CGRectMake(screenSize.width - 110, screenSize.height - paddingBottom - 20, 100, 20)];
+    _progressMaxTitle = [[UILabel alloc] initWithFrame:CGRectMake(screenSize.width - 110, screenSize.height - paddingBottom - 25, 100, 20)];
     _progressMaxTitle.textAlignment = NSTextAlignmentRight;
     _progressMaxTitle.text = @"00:00";
     _progressMaxTitle.font = [UIFont systemFontOfSize:14];
     _progressMaxTitle.textColor = [UIColor grayColor];
     [self.view addSubview:_progressMaxTitle];
     
-    _progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, screenSize.height - paddingBottom - 20, 100, 20)];
+    _progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, screenSize.height - paddingBottom - 25, 100, 20)];
     _progressTitle.textAlignment = NSTextAlignmentLeft;
     _progressTitle.text = @"00:00";
     _progressTitle.font = [UIFont systemFontOfSize:14];
@@ -260,7 +255,7 @@
 {
     CGSize screenSize = self.view.frame.size;
     
-    int paddingBottom = 50;
+    int paddingBottom = 40;
     // 上一首
     UIImage *btnBackImage = [UIImage imageNamed:@"toolbar_prev_n_p"];
     UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnBackImage.size.width, btnBackImage.size.height)];
@@ -363,6 +358,12 @@
     _pageLabel.text = [NSString stringWithFormat:@"%d/%d", (int)[_data count] - _index, (int)[_data count]];
 }
 
+-(void)sliderValueChanged:(id)sender
+{
+    UISlider *slider = (UISlider*)sender;
+    _avAudioPlayer.currentTime = slider.value*(_avAudioPlayer.duration);
+}
+
 // 播放
 - (void)playAction:(UIButton *)sender
 {
@@ -447,7 +448,8 @@
 - (void)playProgress
 {
     // 通过音频播放时长的百分比,给progressview进行赋值;
-    _progressV.progress = _avAudioPlayer.currentTime / _avAudioPlayer.duration;
+//    _progressV.progress = _avAudioPlayer.currentTime / _avAudioPlayer.duration;
+    _progressV.value = _avAudioPlayer.currentTime / _avAudioPlayer.duration;
     
     int min = _avAudioPlayer.currentTime / 60;
     int second = (int)(_avAudioPlayer.currentTime) % 60;
@@ -515,7 +517,7 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSInteger hasEvaluated = [ud integerForKey:@"hasEvaluated"];
-    if (YES || !hasEvaluated)
+    if (!hasEvaluated)
     {
         int rate = [[UMOnlineConfig getConfigParams:@"evaluateAlertRate"] intValue];
         int value = (arc4random() % 100) + 0;
